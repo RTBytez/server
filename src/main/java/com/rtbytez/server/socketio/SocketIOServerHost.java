@@ -1,4 +1,4 @@
-package com.rtbytez.server;
+package com.rtbytez.server.socketio;
 
 import io.socket.engineio.server.EngineIoServer;
 import io.socket.engineio.server.EngineIoServerOptions;

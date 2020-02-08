@@ -1,11 +1,15 @@
 package com.rtbytez.server;
 
-import com.rtbytez.server.events.ConnectionEvent;
-import com.rtbytez.server.events.DisconnectionEvent;
-import com.rtbytez.server.events.PingEvent;
+import com.rtbytez.server.events.comms.PingEvent;
+import com.rtbytez.server.events.io.ConnectionEvent;
+import com.rtbytez.server.events.io.DisconnectionEvent;
+import com.rtbytez.server.socketio.SocketIOServerHost;
 import io.socket.socketio.server.SocketIoNamespace;
 import io.socket.socketio.server.SocketIoServer;
 
+/**
+ * The birth of the RTBytez Server
+ */
 public class ServerProcess {
 
     public static void main(String[] args) {
@@ -17,7 +21,9 @@ public class ServerProcess {
         namespace.on("ping", new PingEvent());
 
         //noinspection InfiniteLoopStatement,StatementWithEmptyBody
-        while (true) {}
+        while (true) {
+            // Moo. Don't stop the server process.
+        }
     }
 
 }
