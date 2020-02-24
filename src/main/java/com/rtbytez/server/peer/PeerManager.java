@@ -10,10 +10,10 @@ public class PeerManager {
     private static HashMap<String, Peer> peers = new HashMap<>();
 
     /**
-     * TODO: document
+     * Retrieve a Peer based on a socket, if one doesn't exist, create one.
      *
-     * @param socket
-     * @return
+     * @param socket Socket to get peer from or create Peer from socket
+     * @return Newly created or existing peer
      */
     public static Peer getPeer(SocketIoSocket socket) {
         for (Map.Entry<String, Peer> entry : peers.entrySet()) {
@@ -23,25 +23,34 @@ public class PeerManager {
         }
         // Didn't find a peer of that socket in the list...
         Peer peer = new Peer(socket);
-        peers.put(socket.getId(), peer);
+        peers.put(peer.getId(), peer);
         return peer;
     }
 
     /**
-     * TODO: document
+     * Retrieve a Peer based on it's ID
      *
-     * @param id
-     * @return
+     * @param id ID of Peer
+     * @return Peer instance that is associated to ID
+     */
+    public static Peer getPeer(String id) {
+        return peers.get(id);
+    }
+
+    /**
+     * Check if peer exists based on ID
+     *
+     * @param id ID in question
+     * @return boolean if peer exists or not
      */
     public static boolean peerExists(String id) {
         return peers.containsKey(id);
     }
 
     /**
-     * TODO: document
+     * Delete a peer from server memory
      *
-     * @param id
-     * @return
+     * @param id ID of peer to delete
      */
     public static void deletePeer(String id) {
         peers.remove(id);

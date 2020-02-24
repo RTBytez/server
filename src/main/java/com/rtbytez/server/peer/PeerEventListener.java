@@ -2,48 +2,67 @@ package com.rtbytez.server.peer;
 
 import io.socket.socketio.server.SocketIoSocket;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Internal Use Only - Handles events that are sent across the tunnel to written receivers
  */
 class PeerEventListener implements SocketIoSocket.AllEventListener {
 
-    //TODO: Document later
     private final Peer peer;
-    private HashMap<String, PeerEventHandler> handlers = new HashMap<>();
+    private List<PeerEventHandlerEntry> peerEventHandlers = new ArrayList<>();
 
     PeerEventListener(Peer peer) {
         this.peer = peer;
     }
 
-    public void addEventHandler(String header, PeerEventHandler handler) {
-        handlers.put(header, handler);
+    /**
+     * Register an event to execute if a message with the appropriate header is sent over the socket
+     *
+     * @param header  The header to listen to
+     * @param handler Your written handler
+     * @return ID of initialized event handler for removal purposes
+     */
+    public int addEventHandler(String header, PeerEventHandler handler) {
+        peerEventHandlers.add(new PeerEventHandlerEntry(header, handler));
+        return peerEventHandlers.size() - 1;
     }
 
-    //TODO: Write later
-    public void removeEventHandler(String header) {
-
+    /**
+     * Remove a handler based on it's given ID
+     *
+     * @param id ID of the handler that is to be removed
+     */
+    public void removeEventHandler(int id) {
+        peerEventHandlers.set(id, null);
     }
 
-    //TODO: Write later
+    /**
+     * Remove all event handlers based on it's header
+     *
+     * @param header Header to unregister
+     */
     public void removeAllEventHandlers(String header) {
-
+        for (int i = 0; i < peerEventHandlers.size(); i++) {
+            if (peerEventHandlers.get(i).getHeader().equals(header)) {
+                peerEventHandlers.set(i, null);
+            }
+        }
     }
 
     /**
      * Remove absolutely every event handler from this peer
      */
     public void removeAllEventHandlers() {
-        handlers.clear();
+        peerEventHandlers.clear();
     }
 
     @Override
     public void event(String eventName, Object... args) {
-        for (Map.Entry<String, PeerEventHandler> entry : handlers.entrySet()) {
-            if (entry.getKey().equals(eventName)) {
-                entry.getValue().exec(eventName, new PeerEventData(args));
+        for (PeerEventHandlerEntry entry : peerEventHandlers) {
+            if (entry.getHeader().equals(eventName)) {
+                entry.getPeerEventHandler().exec(eventName, peer, new PeerEventData(args));
             }
         }
     }
