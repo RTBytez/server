@@ -8,6 +8,13 @@ import io.socket.socketio.server.SocketIoSocket;
 
 public class DisconnectionEvent extends SocketEventHandler {
     public void exec(SocketIoServer server, SocketIoNamespace namespace, SocketIoSocket socket) {
-        PeerManager.deletePeer(socket.getId());
+
+        // The client has let the server know that an official disconnection has been decided and that this is not a timeout
+        if (PeerManager.getPeer(socket).canSafeDisconnect()) {
+            PeerManager.deletePeer(socket.getId());
+        } else {
+            // Timeout or Network Error
+
+        }
     }
 }

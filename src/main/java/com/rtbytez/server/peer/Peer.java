@@ -9,6 +9,7 @@ public class Peer {
 
     private final SocketIoSocket socket;
     private final PeerEventListener eventListener;
+    private boolean canSafeDisconnect = false;
     private String uuid;
     private String secret;
 
@@ -98,5 +99,23 @@ public class Peer {
      */
     public String getSecret() {
         return secret;
+    }
+
+    /**
+     * Has the client notified the server of a disconnection
+     *
+     * @return True if the client has told the server if a known disconnection is going to take place
+     */
+    public boolean canSafeDisconnect() {
+        return canSafeDisconnect;
+    }
+
+    /**
+     * Sets if the client is going to issue a disconnect
+     *
+     * @param canSafeDisconnect true if a known disconnect is going to take place
+     */
+    public void setSafeDisconnect(boolean canSafeDisconnect) {
+        this.canSafeDisconnect = canSafeDisconnect;
     }
 }
