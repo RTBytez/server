@@ -7,10 +7,10 @@ import java.util.UUID;
 
 public class Peer {
 
-    private String uuid;
-    private String secret;
     private final SocketIoSocket socket;
     private final PeerEventListener eventListener;
+    private String uuid;
+    private String secret;
 
     /**
      * Package-private constructor. Use PeerManager to retrieve & create peers
