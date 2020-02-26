@@ -28,7 +28,7 @@ public class Peer {
     /**
      * Send a raw frame to a peer
      *
-     * @param header Data header
+     * @param header Header of frame
      * @param data   Raw string data
      */
     public void emit(String header, String data) {
@@ -38,7 +38,7 @@ public class Peer {
     /**
      * Send a JSON frame to a peer
      *
-     * @param header Data header
+     * @param header Header of frame
      * @param json   JSON data
      */
     public void emit(String header, JSONObject json) {
@@ -46,9 +46,18 @@ public class Peer {
     }
 
     /**
+     * Send an empty data frame to a peer
+     *
+     * @param header Header of frame
+     */
+    public void emit(String header) {
+        socket.emit(header, "");
+    }
+
+    /**
      * @see PeerEventListener#addEventHandler(String, PeerEventHandler)
      */
-    public int registerEvent(String header, PeerEventHandler handler) {
+    public int on(String header, PeerEventHandler handler) {
         return eventListener.addEventHandler(header, handler);
     }
 
