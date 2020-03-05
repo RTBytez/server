@@ -2,8 +2,8 @@ package com.rtbytez.server.peer;
 
 public class PeerEventHandlerEntry {
 
-    String header;
-    PeerEventHandler peerEventHandler;
+    final String header;
+    final PeerEventHandler peerEventHandler;
 
     public PeerEventHandlerEntry(String header, PeerEventHandler handler) {
         this.header = header;

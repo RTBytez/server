@@ -10,7 +10,7 @@ public class Peer {
     private final SocketIoSocket socket;
     private final PeerEventListener eventListener;
     private boolean canSafeDisconnect = false;
-    private String uuid;
+    private final String uuid;
     private String secret;
 
     /**
@@ -58,6 +58,7 @@ public class Peer {
     /**
      * @see PeerEventListener#addEventHandler(String, PeerEventHandler)
      */
+    @SuppressWarnings("UnusedReturnValue")
     public int on(String header, PeerEventHandler handler) {
         return eventListener.addEventHandler(header, handler);
     }

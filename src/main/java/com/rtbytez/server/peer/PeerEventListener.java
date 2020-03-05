@@ -11,7 +11,7 @@ import java.util.List;
 class PeerEventListener implements SocketIoSocket.AllEventListener {
 
     private final Peer peer;
-    private List<PeerEventHandlerEntry> peerEventHandlers = new ArrayList<>();
+    private final List<PeerEventHandlerEntry> peerEventHandlers = new ArrayList<>();
 
     PeerEventListener(Peer peer) {
         this.peer = peer;

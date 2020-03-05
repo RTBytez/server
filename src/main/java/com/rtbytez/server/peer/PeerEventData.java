@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class PeerEventData {
 
-    Object[] rawData;
+    final Object[] rawData;
 
     /**
      * Package-protected constructor - Only to be initialized by PeerEventListener

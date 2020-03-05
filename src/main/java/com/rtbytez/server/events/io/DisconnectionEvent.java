@@ -13,7 +13,7 @@ public class DisconnectionEvent extends SocketEventHandler {
         if (PeerManager.getPeer(socket).canSafeDisconnect()) {
             PeerManager.deletePeer(socket.getId());
         } else {
-            // Timeout or Network Error
+            //TODO: Timeout or Network Error
 
         }
     }
