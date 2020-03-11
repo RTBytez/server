@@ -1,20 +1,18 @@
 package com.rtbytez.server.events.io;
 
-import com.rtbytez.server.events.SocketEventHandler;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.rtbytez.server.peer.PeerManager;
-import io.socket.socketio.server.SocketIoNamespace;
-import io.socket.socketio.server.SocketIoServer;
-import io.socket.socketio.server.SocketIoSocket;
 
-public class DisconnectionEvent extends SocketEventHandler {
-    public void exec(SocketIoServer server, SocketIoNamespace namespace, SocketIoSocket socket) {
+public class DisconnectionEvent implements DisconnectListener {
 
+    @Override
+    public void onDisconnect(SocketIOClient socket) {
         // The client has let the server know that an official disconnection has been decided and that this is not a timeout
         if (PeerManager.getPeer(socket).canSafeDisconnect()) {
-            PeerManager.deletePeer(socket.getId());
+            PeerManager.deletePeer(socket.getSessionId().toString());
         } else {
             //TODO: Timeout or Network Error
-
         }
     }
 }

@@ -1,13 +1,13 @@
 package com.rtbytez.server.peer;
 
-import io.socket.socketio.server.SocketIoSocket;
+import com.corundumstudio.socketio.SocketIOClient;
 import org.json.JSONObject;
 
 import java.util.UUID;
 
 public class Peer {
 
-    private final SocketIoSocket socket;
+    private final SocketIOClient socket;
     private final PeerEventListener eventListener;
     private boolean canSafeDisconnect = false;
     private final String uuid;
@@ -16,14 +16,13 @@ public class Peer {
     /**
      * Package-private constructor. Use PeerManager to retrieve & create peers
      *
-     * @see PeerManager#getPeer(SocketIoSocket)
+     * @see PeerManager#getPeer(SocketIOClient)
      */
-    Peer(SocketIoSocket socket) {
+    Peer(SocketIOClient socket) {
         this.socket = socket;
         this.uuid = UUID.randomUUID().toString();
         this.secret = UUID.randomUUID().toString() + UUID.randomUUID().toString();
         eventListener = new PeerEventListener(this);
-        socket.registerAllEventListener(eventListener);
     }
 
     /**
@@ -33,7 +32,7 @@ public class Peer {
      * @param data   Raw string data
      */
     public void emit(String header, String data) {
-        socket.emit(header, data);
+        socket.sendEvent(header, data);
     }
 
     /**
@@ -43,7 +42,7 @@ public class Peer {
      * @param json   JSON data
      */
     public void emit(String header, JSONObject json) {
-        socket.emit(header, json.toString());
+        socket.sendEvent(header, json.toString());
     }
 
     /**
@@ -52,7 +51,7 @@ public class Peer {
      * @param header Header of frame
      */
     public void emit(String header) {
-        socket.emit(header, "");
+        socket.sendEvent(header, "");
     }
 
     /**
@@ -91,6 +90,19 @@ public class Peer {
      */
     public String getId() {
         return uuid;
+    }
+
+    /**
+     * Retrieve the peer's IP.
+     *
+     * @return Ip Address of Peer
+     */
+    public String getIp() {
+        return socket.getRemoteAddress().toString();
+    }
+
+    public PeerEventListener getEventListener() {
+        return eventListener;
     }
 
     /**

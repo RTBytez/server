@@ -1,6 +1,6 @@
 package com.rtbytez.server.peer;
 
-import io.socket.socketio.server.SocketIoSocket;
+import com.corundumstudio.socketio.SocketIOClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +15,9 @@ public class PeerManager {
      * @param socket Socket to get peer from or create Peer from socket
      * @return Newly created or existing peer
      */
-    public static Peer getPeer(SocketIoSocket socket) {
+    public static Peer getPeer(SocketIOClient socket) {
         for (Map.Entry<String, Peer> entry : peers.entrySet()) {
-            if (entry.getKey().equals(socket.getId())) {
+            if (entry.getKey().equals(socket.getSessionId().toString())) {
                 return entry.getValue();
             }
         }

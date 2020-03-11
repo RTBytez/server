@@ -5,6 +5,11 @@ import com.rtbytez.server.peer.PeerEventData;
 import com.rtbytez.server.peer.PeerEventHandler;
 
 public class AuthenticateEvent extends PeerEventHandler {
+
+    public AuthenticateEvent() {
+        super();
+    }
+
     @Override
     public void exec(String header, Peer peer, PeerEventData data) {
 

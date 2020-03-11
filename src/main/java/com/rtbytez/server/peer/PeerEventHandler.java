@@ -1,5 +1,7 @@
 package com.rtbytez.server.peer;
 
+import com.rtbytez.server.Debug;
+
 public abstract class PeerEventHandler {
 
     /**
@@ -10,5 +12,9 @@ public abstract class PeerEventHandler {
      * @param data   Data from the the frame received
      */
     public abstract void exec(String header, Peer peer, PeerEventData data);
+
+    public PeerEventHandler() {
+        Debug.log("PeerEventHandler", "Registered " + this.getClass().getCanonicalName());
+    }
 
 }
