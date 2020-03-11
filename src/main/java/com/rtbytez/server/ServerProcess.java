@@ -14,7 +14,7 @@ public class ServerProcess {
 
     public static void main(String[] args) {
         Configuration config = new Configuration();
-        config.setHostname("");
+        config.setHostname("127.0.0.1");
         config.setPort(1338);
         SocketConfig socketConfig = new SocketConfig();
         socketConfig.setReuseAddress(true);
@@ -24,7 +24,9 @@ public class ServerProcess {
         server.addConnectListener(new ConnectionEvent());
         server.addDisconnectListener(new DisconnectionEvent());
         server.addEventInterceptor(new EventManager());
+        server.start();
         Debug.log("SERVER", "Server startup complete");
+
 
         //noinspection InfiniteLoopStatement,StatementWithEmptyBody
         while (true) {
