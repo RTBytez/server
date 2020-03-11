@@ -20,11 +20,11 @@ public class ServerProcess {
         socketConfig.setReuseAddress(true);
         config.setSocketConfig(socketConfig);
         SocketIOServer server = new SocketIOServer(config);
-        Debug.log("[SERVER]", "Server process started");
+        Debug.log("SERVER", "Server process started");
         server.addConnectListener(new ConnectionEvent());
         server.addDisconnectListener(new DisconnectionEvent());
         server.addEventInterceptor(new EventManager());
-        Debug.log("[SERVER]", "Server startup complete");
+        Debug.log("SERVER", "Server startup complete");
 
         //noinspection InfiniteLoopStatement,StatementWithEmptyBody
         while (true) {
