@@ -20,6 +20,14 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>local-repo</id>
+            <name>local-repo</name>
+            <url>file://${project.basedir}/repo</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -28,17 +36,17 @@
         </dependency>
 
         <dependency>
-            <groupId>com.corundumstudio.socketio</groupId>
-            <artifactId>netty-socketio</artifactId>
-            <version>1.7.18</version>
+            <groupId>nettyio</groupId>
+            <artifactId>customsocketio</artifactId>
+            <version>1.7.19-Customized-0.1</version>
+            <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
-
     </dependencies>
-
 
 </project>
