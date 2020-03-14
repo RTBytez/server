@@ -27,7 +27,6 @@ public class ServerProcess {
         server.start();
         Debug.log("SERVER", "Server startup complete");
 
-
         //noinspection InfiniteLoopStatement,StatementWithEmptyBody
         while (true) {
             // Moo. Don't stop the server process.
