@@ -7,6 +7,8 @@
     <groupId>com.rtbytez</groupId>
     <artifactId>server</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
     <build>
         <plugins>
             <plugin>
@@ -30,15 +32,16 @@
         <dependency>
             <groupId>com.corundumstudio.socketio</groupId>
             <artifactId>netty-socketio</artifactId>
-            <version>1.7.18</version>
+            <version>1.7.18-patched</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/netty-socketio-1.7.18-patched.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
-
     </dependencies>
-
 
 </project>
