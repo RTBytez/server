@@ -1,11 +1,19 @@
 package com.rtbytez.server.peer;
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.rtbytez.server.Console;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PeerManager {
+
+    /**
+     * Disabled Object Initialization due to this class being static-only
+     */
+    private PeerManager() {
+
+    }
 
     private static HashMap<String, Peer> peers = new HashMap<>();
 
@@ -28,13 +36,33 @@ public class PeerManager {
     }
 
     /**
-     * Retrieve a Peer based on it's ID
+     * Retrieve a Peer based on it's ID.
+     * NOTE: This is NOT Socket ID!
      *
      * @param id ID of Peer
      * @return Peer instance that is associated to ID
+     * @see PeerManager
      */
     public static Peer getPeer(String id) {
-        return peers.get(id);
+        Peer peer = peers.get(id);
+        if (peer == null) {
+            Console.error("PeerManager", "Returned null peer on getPeer: PeerID=" + id);
+        }
+        return peer;
+    }
+
+
+    /**
+     * Retrieve a Peer based on it's socket ID
+     */
+    public static Peer getPeerBySocketId(String id) {
+        for (Map.Entry<String, Peer> stringPeerEntry : peers.entrySet()) {
+            if (stringPeerEntry.getValue().getSocketId().equals(id)) {
+                return stringPeerEntry.getValue();
+            }
+        }
+        Console.error("PeerManager", "Returned null peer on getPeerBySocketId: PeerSocketId=" + id);
+        return null;
     }
 
     /**

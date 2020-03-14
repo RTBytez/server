@@ -9,8 +9,8 @@ public class Peer {
 
     private final SocketIOClient socket;
     private final PeerEventListener eventListener;
-    private boolean canSafeDisconnect = false;
     private final String uuid;
+    private boolean canSafeDisconnect = false;
     private String secret;
 
     /**
@@ -90,6 +90,16 @@ public class Peer {
      */
     public String getId() {
         return uuid;
+    }
+
+    /**
+     * Retrieve the peer's Socket ID. This can be used with PeerManager#getPeerBySocketId(String)
+     * This is to only be used in raw IO communications such as connect and disconnect events
+     *
+     * @return Socket ID of peer
+     */
+    public String getSocketId() {
+        return socket.getSessionId().toString();
     }
 
     /**

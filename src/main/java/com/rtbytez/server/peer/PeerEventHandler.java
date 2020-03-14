@@ -1,6 +1,6 @@
 package com.rtbytez.server.peer;
 
-import com.rtbytez.server.Debug;
+import com.rtbytez.server.Console;
 
 public abstract class PeerEventHandler {
 
@@ -14,7 +14,7 @@ public abstract class PeerEventHandler {
     public abstract void exec(String header, Peer peer, PeerEventData data);
 
     public PeerEventHandler() {
-        Debug.log("PeerEventHandler", "Registered " + this.getClass().getCanonicalName());
+        Console.log("PeerEventHandler", "Registered " + this.getClass().getTypeName());
     }
 
 }
