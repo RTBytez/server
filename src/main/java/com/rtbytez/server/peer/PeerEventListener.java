@@ -1,14 +1,12 @@
 package com.rtbytez.server.peer;
 
-import io.socket.socketio.server.SocketIoSocket;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Internal Use Only - Handles events that are sent across the tunnel to written receivers
  */
-class PeerEventListener implements SocketIoSocket.AllEventListener {
+public class PeerEventListener {
 
     private final Peer peer;
     private final List<PeerEventHandlerEntry> peerEventHandlers = new ArrayList<>();
@@ -58,11 +56,16 @@ class PeerEventListener implements SocketIoSocket.AllEventListener {
         peerEventHandlers.clear();
     }
 
-    @Override
-    public void event(String eventName, Object... args) {
+    /**
+     * Execute an event based on the registered listeners. To be used by the EventManager
+     *
+     * @param header The header of the event
+     * @param data   The data
+     */
+    public void event(String header, Object... data) {
         for (PeerEventHandlerEntry entry : peerEventHandlers) {
-            if (entry.getHeader().equals(eventName)) {
-                entry.getPeerEventHandler().exec(eventName, peer, new PeerEventData(args));
+            if (entry.getHeader().equals(header)) {
+                entry.getPeerEventHandler().exec(header, peer, new PeerEventData(data));
             }
         }
     }
