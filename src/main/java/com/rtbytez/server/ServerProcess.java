@@ -13,6 +13,7 @@ import com.rtbytez.server.events.io.DisconnectionEvent;
 public class ServerProcess {
 
     public static void main(String[] args) {
+        //TODO: Make this mess look better and make args instead of hard-coded values
         Configuration config = new Configuration();
         config.setHostname("127.0.0.1");
         config.setPort(1338);
