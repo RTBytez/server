@@ -18,7 +18,6 @@ public class Console {
         System.out.println(message);
     }
 
-
     /**
      * Log a message to the console with error context
      *
@@ -47,5 +46,4 @@ public class Console {
     public static void log(String title, String message) {
         System.out.println("[" + title + "] " + message);
     }
-
 }

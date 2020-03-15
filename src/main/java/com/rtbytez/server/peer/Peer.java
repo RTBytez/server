@@ -14,7 +14,7 @@ public class Peer {
     private String secret;
 
     /**
-     * Package-private constructor. Use PeerManager to retrieve & create peers
+     * Package-private constructor. Use PeerManager to retrieve & create peers.
      *
      * @see PeerManager#getPeer(SocketIOClient)
      */
@@ -111,12 +111,18 @@ public class Peer {
         return socket.getRemoteAddress().toString();
     }
 
+    /**
+     * Retrieve the peer's Event Listener
+     *
+     * @return Event Listener of Peer
+     */
     public PeerEventListener getEventListener() {
         return eventListener;
     }
 
     /**
-     * Retrieve the peer's Secret. This token is used to overwrite the socket just in case a drop and reconnection occurs.
+     * Retrieve the peer's Secret.
+     * This token is used to overwrite the socket just in case a drop and reconnection occurs.
      *
      * @return Secret of peer
      */
