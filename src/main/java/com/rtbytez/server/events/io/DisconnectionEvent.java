@@ -18,7 +18,7 @@ public class DisconnectionEvent implements DisconnectListener {
 
         // The client has let the server know that an official disconnection has been decided and that this is not a timeout
         if (peer.canSafeDisconnect()) {
-            Console.log("Disconnect Event", peer.getId() + " Disconnected gracefully");
+            Console.log("DisconnectEvent", peer.getId() + " Disconnected gracefully");
             PeerManager.deletePeer(socket.getSessionId().toString());
         } else {
             Console.log("Disconnect Event", peer.getId() + " Disconnected");
