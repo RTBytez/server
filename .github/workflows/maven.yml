@@ -22,3 +22,9 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    
+    - uses: actions/checkout@v1
+    - uses: actions/upload-artifact@v1
+      with:
+        name: RTBytezServer-1.0-SNAPSHOT.jar
+        path: target
