@@ -14,7 +14,7 @@ public abstract class PeerEventHandler {
     public abstract void exec(String header, Peer peer, PeerEventData data);
 
     public PeerEventHandler() {
-        Console.log("PeerEventHandler", "Registered " + this.getClass().getTypeName());
+        Console.log("PeerEventHandler", "Registered " + this.getClass().getSimpleName());
     }
 
 }

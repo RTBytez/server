@@ -1,5 +1,6 @@
 package com.rtbytez.server.peer;
 
+import com.rtbytez.server.Console;
 import org.json.JSONObject;
 
 public class PeerEventData {
@@ -9,21 +10,43 @@ public class PeerEventData {
     /**
      * Package-protected constructor - Only to be initialized by PeerEventListener
      */
-    PeerEventData(Object[] rawData) {
+    PeerEventData(Object... rawData) {
         this.rawData = rawData;
+    }
+
+    public boolean isThereData() {
+        return rawData.length > 0;
     }
 
     /**
      * @return Data as string
      */
     public String getAsString() {
-        return (String) rawData[0];
+        if (isThereData()) {
+            return rawData[0].toString();
+        }
+        return "";
     }
 
     /**
      * @return Data as JSONObject
      */
     public JSONObject getAsJson() {
-        return new JSONObject((String) rawData[0]);
+        if (isThereData()) {
+            try {
+                JSONObject.testValidity(rawData[0]);
+                return new JSONObject(rawData[0].toString());
+            } catch (Exception e) {
+                Console.error("PeerEventData", "There was a problem converting rawData into a JSONObject");
+                e.printStackTrace();
+            }
+
+        }
+        return new JSONObject();
+    }
+
+    @Override
+    public String toString() {
+        return getAsString();
     }
 }

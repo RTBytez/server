@@ -1,6 +1,7 @@
 package com.rtbytez.server.peer;
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.rtbytez.server.Console;
 import org.json.JSONObject;
 
 import java.util.UUID;
@@ -21,18 +22,27 @@ public class Peer {
     Peer(SocketIOClient socket) {
         this.socket = socket;
         this.uuid = UUID.randomUUID().toString();
-        this.secret = UUID.randomUUID().toString() + UUID.randomUUID().toString();
+        this.secret = UUID.randomUUID().toString() + "-" + UUID.randomUUID().toString();
         eventListener = new PeerEventListener(this);
     }
 
     /**
-     * Send a raw frame to a peer
+     * Send an empty data frame to a peer
+     *
+     * @param header Header of frame
+     */
+    public void emit(String header) {
+        this.rawEmit(header, "");
+    }
+
+    /**
+     * Send a string frame to a peer
      *
      * @param header Header of frame
      * @param data   Raw string data
      */
     public void emit(String header, String data) {
-        socket.sendEvent(header, data);
+        this.rawEmit(header, data);
     }
 
     /**
@@ -42,16 +52,18 @@ public class Peer {
      * @param json   JSON data
      */
     public void emit(String header, JSONObject json) {
-        socket.sendEvent(header, json.toString());
+        this.rawEmit(header, json);
     }
 
     /**
-     * Send an empty data frame to a peer
+     * Send a raw frame to a peer
      *
      * @param header Header of frame
+     * @param data   Data of frame
      */
-    public void emit(String header) {
-        socket.sendEvent(header, "");
+    public void rawEmit(String header, Object data) {
+        Console.log("Packet", this.getShort() + " <= {" + header + " [" + data.toString() + "]}");
+        socket.sendEvent(header, data.toString());
     }
 
     /**
@@ -93,6 +105,24 @@ public class Peer {
     }
 
     /**
+     * Retrieve the peer's nick. This is used for short hand purposes.
+     *
+     * @return Nick of Peer
+     */
+    public String getNick() {
+        return uuid.substring(0, 7);
+    }
+
+    /**
+     * Retrieve the peer's short ID. This ID is used for identification purposes in the console.
+     *
+     * @return Short ID of peer
+     */
+    public String getShort() {
+        return this.getNick() + "@" + this.getAddress();
+    }
+
+    /**
      * Retrieve the peer's Socket ID. This can be used with PeerManager#getPeerBySocketId(String)
      * This is to only be used in raw IO communications such as connect and disconnect events
      *
@@ -107,8 +137,8 @@ public class Peer {
      *
      * @return Ip Address of Peer
      */
-    public String getIp() {
-        return socket.getRemoteAddress().toString();
+    public String getAddress() {
+        return socket.getRemoteAddress().toString().substring(1).replaceAll(":.*", "");
     }
 
     /**
