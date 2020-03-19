@@ -23,7 +23,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     
-    - uses: actions/checkout@v1
+    - name: Create Artifact
     - uses: actions/upload-artifact@v1
       with:
         name: RTBytezServer-1.0-SNAPSHOT.jar
