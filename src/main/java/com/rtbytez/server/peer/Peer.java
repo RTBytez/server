@@ -1,7 +1,7 @@
 package com.rtbytez.server.peer;
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.rtbytez.server.Console;
+import com.rtbytez.server.util.Console;
 import org.json.JSONObject;
 
 import java.util.UUID;

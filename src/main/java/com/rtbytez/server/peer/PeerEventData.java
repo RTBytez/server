@@ -1,6 +1,6 @@
 package com.rtbytez.server.peer;
 
-import com.rtbytez.server.Console;
+import com.rtbytez.server.util.Console;
 import org.json.JSONObject;
 
 public class PeerEventData {
@@ -38,7 +38,7 @@ public class PeerEventData {
                 return new JSONObject(rawData[0].toString());
             } catch (Exception e) {
                 Console.error("PeerEventData", "There was a problem converting rawData into a JSONObject");
-                e.printStackTrace();
+                Console.error("PeerEventData", e.getMessage());
             }
 
         }

@@ -2,9 +2,9 @@ package com.rtbytez.server.events.io;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.listener.DisconnectListener;
-import com.rtbytez.server.Console;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerManager;
+import com.rtbytez.server.util.Console;
 
 public class DisconnectionEvent implements DisconnectListener {
 

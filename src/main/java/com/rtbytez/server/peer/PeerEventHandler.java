@@ -1,6 +1,6 @@
 package com.rtbytez.server.peer;
 
-import com.rtbytez.server.Console;
+import com.rtbytez.server.util.Console;
 
 public abstract class PeerEventHandler {
 
