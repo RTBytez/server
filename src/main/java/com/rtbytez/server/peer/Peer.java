@@ -23,7 +23,7 @@ public class Peer {
         this.socket = socket;
         this.uuid = UUID.randomUUID().toString();
         this.secret = UUID.randomUUID().toString() + "-" + UUID.randomUUID().toString();
-        eventListener = new PeerEventListener(this);
+        this.eventListener = new PeerEventListener(this);
     }
 
     /**
