@@ -15,6 +15,7 @@ public class FileChangeEvent extends PeerEventHandler {
     public void exec(String header, Peer peer, PeerEventData data) {
         /* TODO: Check Peer Authentication and Room Membership Here */
         RTJSON json = data.getAsRTJSON();
+        // TODO: Do
         switch (json.getString("type", "")) {
             case "new":
 

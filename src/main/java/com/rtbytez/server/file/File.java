@@ -6,15 +6,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This object represents a file in the server's memory
+ */
 public class File {
 
-    HashMap<String, Line> lines = new HashMap<>();
-    List<Line> linesInOrder = new ArrayList<>();
+    private HashMap<String, Line> lines = new HashMap<>();
+    private List<Line> linesInOrder = new ArrayList<>();
 
     public File() {
 
     }
 
+    /**
+     * Create a new line
+     *
+     * @param lineNumber Where this line is going to be stored
+     * @return The line object that is created
+     */
     public Line newLine(int lineNumber) {
         if (lineNumber == 0) {
             lineNumber = 1;
@@ -32,12 +41,17 @@ public class File {
         return line;
     }
 
+    /**
+     * Delete a line by it's assigned id
+     *
+     * @param id The id of the line to delete
+     */
     public void deleteLineById(String id) {
         Line line = lines.get(id);
         lines.remove(id);
         linesInOrder.remove(line);
 
-        // Loop all lines that come after this one and subtract 1 to the line number
+        // Loop all lines that come after this one and subtract 1 from the line number
         for (int i = line.getLineNumber(); i < linesInOrder.size(); i++) {
             Line editingLine = linesInOrder.get(i);
             editingLine.setLineNumber(i - 1);
@@ -45,6 +59,11 @@ public class File {
 
     }
 
+    /**
+     * Delete a line by it's line number
+     *
+     * @param lineNumber The line number to delete
+     */
     public void deleteLineByLineNumber(int lineNumber) {
         Line line = linesInOrder.get(lineNumber);
         lines.remove(line.getId());
@@ -58,14 +77,31 @@ public class File {
 
     }
 
+    /**
+     * Retrieve a line by it's id
+     *
+     * @param id The id of the line to retrieve
+     * @return The line with that id
+     */
     public Line getLineById(String id) {
         return lines.get(id);
     }
 
+    /**
+     * Retrieve a line by it's line number
+     *
+     * @param lineNumber The line number to retrieve
+     * @return The line at that location
+     */
     public Line getLineByLineNumber(int lineNumber) {
         return linesInOrder.get(lineNumber - 1);
     }
 
+    /**
+     * Take all the lines and build the file to a readable format
+     *
+     * @return The file as a string
+     */
     public String buildFile() {
         if (!linesInOrder.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -74,6 +110,13 @@ public class File {
             return str.substring(0, str.length() - 1);
         }
         return "";
+    }
+
+    /**
+     * @see File#buildFile()
+     */
+    public String toString() {
+        return buildFile();
     }
 
 }
