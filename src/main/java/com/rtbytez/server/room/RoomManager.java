@@ -14,4 +14,19 @@ public class RoomManager {
     }
 
 
+    public static Room createRoom() {
+        Room room = new Room();
+        rooms.put(room.getId(), room);
+        return room;
+    }
+
+    public static Room getRoom(String id) {
+        return rooms.get(id);
+    }
+
+    public static void deleteRoom(String id) {
+        rooms.remove(id);
+    }
+
+
 }
