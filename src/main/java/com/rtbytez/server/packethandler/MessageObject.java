@@ -11,6 +11,10 @@ public class MessageObject {
         this.message = message;
     }
 
+    public MessageObject(Object object) {
+        this.message = String.valueOf(object);
+    }
+
     public String toString() {
         return message;
     }

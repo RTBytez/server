@@ -11,8 +11,11 @@ public class Peer {
     private final SocketIOClient socket;
     private final PeerEventListener eventListener;
     private final String uuid;
-    private boolean canSafeDisconnect = false;
+    private String username;
     private String secret;
+
+    private boolean canSafeDisconnect;
+
 
     /**
      * Package-private constructor. Use PeerManager to retrieve & create peers.
@@ -24,6 +27,8 @@ public class Peer {
         this.uuid = UUID.randomUUID().toString();
         this.secret = UUID.randomUUID().toString() + "-" + UUID.randomUUID().toString();
         this.eventListener = new PeerEventListener(this);
+        this.canSafeDisconnect = false;
+        this.username = "";
     }
 
     /**
@@ -176,5 +181,23 @@ public class Peer {
      */
     public void setSafeDisconnect(boolean canSafeDisconnect) {
         this.canSafeDisconnect = canSafeDisconnect;
+    }
+
+    /**
+     * Get the username of the peer
+     *
+     * @return The username of the peer
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Set the username of this peer
+     *
+     * @param username Associated username
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

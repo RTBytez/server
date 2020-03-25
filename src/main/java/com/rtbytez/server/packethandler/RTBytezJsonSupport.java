@@ -6,7 +6,7 @@ import com.corundumstudio.socketio.protocol.JacksonJsonSupport;
 import com.corundumstudio.socketio.protocol.JsonSupport;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.netty.util.internal.PlatformDependent;
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,37 +74,14 @@ public class RTBytezJsonSupport extends JacksonJsonSupport implements JsonSuppor
 
         @Override
         public Event deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            ObjectMapper mapper = (ObjectMapper) jp.getCodec();
-            String eventName = jp.nextTextValue();
-
-            EventKey ek = new EventKey(namespaceClass.get(), eventName);
-
+            TreeNode tree = jp.getCodec().readTree(jp);
+            String raw = tree.toString();
+            JSONArray array = new JSONArray(raw);
+            String eventName = array.getString(0);
             List<Object> eventArgs = new ArrayList<Object>();
+            eventArgs.add(new MessageObject(array.get(1).toString()));
             Event event = new Event(eventName, eventArgs);
-            List<Class<?>> eventClasses;
-            if (!eventMapping.containsKey(ek)) {
-                eventClasses = new ArrayList<>();
-                eventClasses.add(MessageObject.class);
-            } else {
-                eventClasses = eventMapping.get(ek);
-            }
-
-            int i = 0;
-            while (true) {
-                JsonToken token = jp.nextToken();
-                if (token == JsonToken.END_ARRAY) {
-                    break;
-                }
-                if (i > eventClasses.size() - 1) {
-                    log.debug("Event {} has more args than declared in handler: {}", eventName, null);
-                    break;
-                }
-                Class<?> eventClass = eventClasses.get(i);
-                Object arg = mapper.readValue(jp, eventClass);
-                eventArgs.add(arg);
-            }
             return event;
         }
-
     }
 }
