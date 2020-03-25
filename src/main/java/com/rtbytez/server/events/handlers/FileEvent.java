@@ -107,7 +107,6 @@ public class FileEvent extends PeerEventHandler {
                 }
                 File file = room.getFileManager().getFile(path);
                 peer.emit("file", MessageCreator.fileRetrieve(room, path, file));
-                peer.emit("file", MessageCreator.ok());
                 return;
             }
 
