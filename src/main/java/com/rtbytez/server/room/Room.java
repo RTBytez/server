@@ -110,7 +110,7 @@ public class Room {
      * @param data   The data to send
      */
     public void broadcast(String header, JSONObject data) {
-
+        members.forEach((peer, roomRole) -> peer.emit(header, data));
     }
 
     /**
