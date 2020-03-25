@@ -8,7 +8,10 @@ import com.rtbytez.server.events.io.ConnectionEvent;
 import com.rtbytez.server.events.io.DisconnectionEvent;
 import com.rtbytez.server.packethandler.RTBytezJsonSupport;
 import com.rtbytez.server.util.Console;
+import org.slf4j.LoggerFactory;
+import org.slf4j.impl.SimpleLogger;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +44,16 @@ public class ServerProcess {
             if (str.contains("-port=")) {
                 port = Integer.parseInt(str.substring(6));
             }
+        }
+
+        // Disable SocketIOServer Logger
+        SimpleLogger logger = (SimpleLogger) LoggerFactory.getLogger(SocketIOServer.class);
+        try {
+            Field field = SimpleLogger.class.getDeclaredField("currentLogLevel");
+            field.setAccessible(true);
+            field.set(logger, 25);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
         }
 
         Configuration config = new Configuration();
