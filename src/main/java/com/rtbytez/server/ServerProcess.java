@@ -64,12 +64,12 @@ public class ServerProcess {
         config.setSocketConfig(socketConfig);
         config.setJsonSupport(new RTBytezJsonSupport());
         SocketIOServer server = new SocketIOServer(config);
-        Console.log("SERVER", "Starting on " + address + ":" + port + " ...");
+        Console.log("Server", "Starting on " + address + ":" + port + " ...");
         server.addConnectListener(new ConnectionEvent());
         server.addDisconnectListener(new DisconnectionEvent());
         server.addEventInterceptor(new EventManager());
         server.start();
-        Console.log("SERVER", "Startup complete!");
+        Console.log("Server", "Startup complete!");
 
         //noinspection InfiniteLoopStatement,StatementWithEmptyBody
         while (true) {
