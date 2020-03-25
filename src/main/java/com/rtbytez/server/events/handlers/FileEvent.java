@@ -87,6 +87,7 @@ public class FileEvent extends PeerEventHandler {
                     return;
                 }
                 room.getFileIORouter().renameFile(peer, oldPath, newPath);
+                peer.emit("file", MessageCreator.ok());
                 return;
             }
 
@@ -106,6 +107,7 @@ public class FileEvent extends PeerEventHandler {
                 }
                 File file = room.getFileManager().getFile(path);
                 peer.emit("file", MessageCreator.fileRetrieve(room, path, file));
+                peer.emit("file", MessageCreator.ok());
                 return;
             }
 
@@ -129,6 +131,7 @@ public class FileEvent extends PeerEventHandler {
                 }
                 int lineNumber = json.getInt("lineNumber");
                 room.getFileIORouter().addLine(peer, path, lineNumber);
+                peer.emit("file", MessageCreator.ok());
                 return;
             }
 
@@ -137,7 +140,7 @@ public class FileEvent extends PeerEventHandler {
                     peer.emit("file", MessageCreator.noPermission());
                     return;
                 }
-                if (!json.has("path", "lineID", "text")) {
+                if (!json.has("path", "lineId", "text")) {
                     peer.emit("file", MessageCreator.invalidArguments());
                     return;
                 }
@@ -153,6 +156,7 @@ public class FileEvent extends PeerEventHandler {
                 }
                 String text = json.getString("text");
                 room.getFileIORouter().modifyLine(peer, path, lineId, text);
+                peer.emit("file", MessageCreator.ok());
                 return;
             }
 
@@ -161,7 +165,7 @@ public class FileEvent extends PeerEventHandler {
                     peer.emit("file", MessageCreator.noPermission());
                     return;
                 }
-                if (!json.has("path", "lineNumber")) {
+                if (!json.has("path", "lineId")) {
                     peer.emit("file", MessageCreator.invalidArguments());
                     return;
                 }
@@ -176,6 +180,7 @@ public class FileEvent extends PeerEventHandler {
                     return;
                 }
                 room.getFileIORouter().removeLine(peer, path, lineId);
+                peer.emit("file", MessageCreator.ok());
                 return;
             }
         }
