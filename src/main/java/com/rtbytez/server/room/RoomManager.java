@@ -1,6 +1,9 @@
 package com.rtbytez.server.room;
 
+import com.rtbytez.server.peer.Peer;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class RoomManager {
 
@@ -14,7 +17,7 @@ public class RoomManager {
     }
 
     /**
-     * Create a room in memory
+     * Create a room
      *
      * @return The room that is newly created
      */
@@ -35,12 +38,37 @@ public class RoomManager {
     }
 
     /**
+     * Retrieve the room of a peer
+     *
+     * @param peer Peer to search for in rooms
+     * @return The room that peer is in or null
+     */
+    public static Room getRoomOf(Peer peer) {
+        for (Map.Entry<String, Room> entry : rooms.entrySet()) {
+            Room room = entry.getValue();
+            if (room.hasMember(peer)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Delete a room by id
      *
      * @param id The id of the room to delete
      */
     public static void deleteRoom(String id) {
         rooms.remove(id);
+    }
+
+    /**
+     * Retrieve the list of rooms in memory
+     *
+     * @return The list of rooms
+     */
+    public static HashMap<String, Room> getRooms() {
+        return rooms;
     }
 
 
