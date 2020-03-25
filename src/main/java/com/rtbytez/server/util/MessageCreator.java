@@ -20,7 +20,7 @@ public class MessageCreator {
 
     // Success
     public static JSONObject ok() {
-        return new JSONObject("{'error': false, 'short': 'ok'");
+        return new JSONObject("{'error': false, 'short': 'ok'}");
     }
 
     public static JSONObject roomJoin(Room room, Peer peer) {

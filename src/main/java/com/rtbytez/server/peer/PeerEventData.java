@@ -50,7 +50,7 @@ public class PeerEventData {
      * @return Data as RTJSON
      */
     public RTJSON getAsRTJSON() {
-        return new RTJSON(this.getAsJson());
+        return new RTJSON(this.getAsJson().toString());
     }
 
     @Override
