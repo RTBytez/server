@@ -4,6 +4,10 @@ import com.rtbytez.server.util.Console;
 
 public abstract class PeerEventHandler {
 
+    public PeerEventHandler() {
+        Console.log("PeerEventHandler", "Registered " + this.getClass().getSimpleName());
+    }
+
     /**
      * Execute when an event is emitted from the PeerEventListener
      *
@@ -12,9 +16,5 @@ public abstract class PeerEventHandler {
      * @param data   Data from the the frame received
      */
     public abstract void exec(String header, Peer peer, PeerEventData data);
-
-    public PeerEventHandler() {
-        Console.log("PeerEventHandler", "Registered " + this.getClass().getSimpleName());
-    }
 
 }

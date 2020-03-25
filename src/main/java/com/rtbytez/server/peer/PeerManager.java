@@ -8,14 +8,14 @@ import java.util.Map;
 
 public class PeerManager {
 
+    private static HashMap<String, Peer> peers = new HashMap<>();
+
     /**
      * Disabled Object Initialization due to this class being static-only
      */
     private PeerManager() {
 
     }
-
-    private static HashMap<String, Peer> peers = new HashMap<>();
 
     /**
      * Retrieve a Peer based on a socket, if one doesn't exist, create one.
