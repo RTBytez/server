@@ -12,7 +12,7 @@ public class Peer {
     private final PeerEventListener eventListener;
     private final String uuid;
     private String username;
-    private String secret;
+    private final String secret;
 
     private boolean canSafeDisconnect;
 
