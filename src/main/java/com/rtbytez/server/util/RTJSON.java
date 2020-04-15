@@ -10,6 +10,9 @@ import java.math.BigInteger;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * JSONObject but with added functions
+ */
 public class RTJSON extends JSONObject {
 
     RTJSON() {
@@ -151,5 +154,14 @@ public class RTJSON extends JSONObject {
         } catch (JSONException e) {
             return defaultValue;
         }
+    }
+
+    public boolean has(String... keys) {
+        for (String key : keys) {
+            if (!this.has(key)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

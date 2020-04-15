@@ -119,4 +119,12 @@ public class File {
         return buildFile();
     }
 
+    /**
+     * Retrieve the lines of a file
+     *
+     * @return The lines
+     */
+    public HashMap<String, Line> getLines() {
+        return lines;
+    }
 }
