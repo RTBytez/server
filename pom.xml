@@ -165,6 +165,11 @@
             <version>3.12.6</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.java-diff-utils</groupId>
+            <artifactId>java-diff-utils</artifactId>
+            <version>4.5</version>
+        </dependency>
 
     </dependencies>
 
