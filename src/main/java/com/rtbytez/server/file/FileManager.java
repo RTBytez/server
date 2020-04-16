@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class FileManager {
 
-    private HashMap<String, File> files = new HashMap<>();
+    private final HashMap<String, File> files = new HashMap<>();
 
     public FileManager() {
 

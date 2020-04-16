@@ -13,10 +13,10 @@ import java.util.HashMap;
 
 public class Room {
 
-    private FileManager fileManager;
-    private FileIORouter fileIORouter;
-    private HashMap<Peer, RoomRole> members;
-    private String id;
+    private final FileManager fileManager;
+    private final FileIORouter fileIORouter;
+    private final HashMap<Peer, RoomRole> members;
+    private final String id;
 
     public Room() {
         this.fileManager = new FileManager();

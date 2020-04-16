@@ -58,9 +58,9 @@ public class Functions {
         String result = "";
         List<String> originalList = Arrays.asList(original.split(""));
         List<String> secondList = Arrays.asList(second.split(""));
-        Patch patch = DiffUtils.diff(originalList, secondList);
+        Patch<String> patch = DiffUtils.diff(originalList, secondList);
         for (Object delta : patch.getDeltas()) {
-            AbstractDelta abstractDelta = (AbstractDelta) delta;
+            AbstractDelta<?> abstractDelta = (AbstractDelta<?>) delta;
             int position = abstractDelta.getSource().getPosition();
             int deltaLength = abstractDelta.getTarget().getLines().size();
             if (abstractDelta instanceof DeleteDelta) {
