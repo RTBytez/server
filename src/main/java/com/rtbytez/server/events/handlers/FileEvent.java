@@ -1,5 +1,6 @@
 package com.rtbytez.server.events.handlers;
 
+import com.rtbytez.server.common.util.RTJSON;
 import com.rtbytez.server.file.File;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventData;
@@ -8,7 +9,6 @@ import com.rtbytez.server.permissions.RoomAction;
 import com.rtbytez.server.room.Room;
 import com.rtbytez.server.room.RoomManager;
 import com.rtbytez.server.util.MessageCreator;
-import com.rtbytez.server.util.RTJSON;
 
 public class FileEvent extends PeerEventHandler {
 

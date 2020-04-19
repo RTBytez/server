@@ -1,4 +1,4 @@
-package com.rtbytez.server.util;
+package com.rtbytez.server.common.util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class RTJSON extends JSONObject {
 
-    RTJSON() {
+    public RTJSON() {
         super();
     }
 
