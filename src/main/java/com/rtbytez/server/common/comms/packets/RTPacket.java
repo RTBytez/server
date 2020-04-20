@@ -1,25 +1,17 @@
 package com.rtbytez.server.common.comms.packets;
 
-import com.rtbytez.server.common.comms.packets.file.FileRequestNew;
 import com.rtbytez.server.common.util.RTJSON;
 
 import java.lang.reflect.Method;
 
 public abstract class RTPacket {
 
-    private final RTJSON raw = new RTJSON(); // TODO: Set back to final
+    private final RTJSON raw = new RTJSON();
     private String header = "";
 
     public RTPacket(String header) {
         this.header = header;
         setError(false);
-    }
-
-    public static void main(String[] args) {
-        RTJSON rtjson = new RTJSON("{'shortCode': 'FileRequestNew', 'filePath': '/var/log/foo', 'lineNumber': 5}");
-        FileRequestNew packet = new FileRequestNew(null, null, 0);
-
-        packet.isValid();
     }
 
     public String getHeader() {

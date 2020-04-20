@@ -76,5 +76,4 @@ public class ServerProcess {
             // Moo. Don't stop the server process.
         }
     }
-
 }
