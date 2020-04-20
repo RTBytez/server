@@ -1,4 +1,4 @@
-package com.rtbytez.server.common.comms.packets.room.broadcasts;
+package com.rtbytez.server.common.comms.packets.file.broadcasts;
 
 import com.rtbytez.server.common.comms.packets.RTPacket;
 
