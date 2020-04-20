@@ -1,6 +1,6 @@
 package com.rtbytez.server.peer;
 
-import com.rtbytez.server.common.util.RTJSON;
+import com.rtbytez.common.util.RTJSON;
 import com.rtbytez.server.util.Console;
 import org.json.JSONObject;
 

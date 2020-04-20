@@ -1,6 +1,6 @@
 package com.rtbytez.server.events.handlers;
 
-import com.rtbytez.server.common.util.RTJSON;
+import com.rtbytez.common.util.RTJSON;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventData;
 import com.rtbytez.server.peer.PeerEventHandler;
