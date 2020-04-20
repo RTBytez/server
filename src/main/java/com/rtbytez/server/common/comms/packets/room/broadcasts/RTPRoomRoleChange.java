@@ -1,15 +1,15 @@
-package com.rtbytez.server.common.comms.packets.room.ok;
+package com.rtbytez.server.common.comms.packets.room.broadcasts;
 
 import com.rtbytez.server.common.comms.packets.RTPacket;
 
-public class RTPRoomJoin extends RTPacket {
-
-    public RTPRoomJoin(String header, String roomId, String peerId, String peerUsername) {
+public class RTPRoomRoleChange extends RTPacket {
+    public RTPRoomRoleChange(String header, String roomId, String peerId, String peerUsername, String role) {
         super(header);
-        setShortCode("RoomJoin");
+        setShortCode("RoomRoleChange");
         put("roomId", roomId);
         put("peerId", peerId);
         put("peerUsername", peerUsername);
+        put("role", role);
     }
 
     public String getRoomId() {
@@ -22,5 +22,9 @@ public class RTPRoomJoin extends RTPacket {
 
     public String getPeerUsername() {
         return getString("peerUsername");
+    }
+
+    public String getRole() {
+        return getString("role");
     }
 }
