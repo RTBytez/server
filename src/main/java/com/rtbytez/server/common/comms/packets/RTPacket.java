@@ -14,6 +14,10 @@ public abstract class RTPacket {
         setError(false);
     }
 
+    public RTPacket() {
+
+    }
+
     public String getHeader() {
         return header;
     }
