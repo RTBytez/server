@@ -5,8 +5,7 @@ import com.rtbytez.common.comms.packets.RTPacketError;
 public class RTPRoomErrorNotInARoom extends RTPacketError {
 
     public RTPRoomErrorNotInARoom(String header) {
-        super(header);
+        super(header, "You are not in a room");
         setShortCode("FileErrorNotInARoom");
-        setMessage("You are not in a room");
     }
 }

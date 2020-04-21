@@ -2,18 +2,13 @@ package com.rtbytez.common.comms.packets;
 
 public abstract class RTPacketError extends RTPacket {
 
-    public RTPacketError(String header) {
+    private final String message;
+
+    public RTPacketError(String header, String message) {
         super(header);
+        this.message = message;
         setShortCode("GenericError");
         setError(true);
-    }
-
-    public String getMessage() {
-        return getString("message");
-    }
-
-    public void setMessage(String message) {
-        put("message", message);
     }
 
 }

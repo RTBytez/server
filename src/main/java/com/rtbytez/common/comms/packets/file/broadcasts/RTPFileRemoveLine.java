@@ -4,31 +4,33 @@ import com.rtbytez.common.comms.packets.RTPacket;
 
 public class RTPFileRemoveLine extends RTPacket {
 
-    protected RTPFileRemoveLine() {
-    }
+    private final String roomId;
+    private final String peerId;
+    private final String filePath;
+    private final String lineId;
 
     public RTPFileRemoveLine(String header, String roomId, String peerId, String filePath, String lineId) {
         super(header);
         setShortCode("FileAddLine");
-        put("roomId", roomId);
-        put("peerId", peerId);
-        put("filePath", filePath);
-        put("lineId", lineId);
+        this.roomId = roomId;
+        this.peerId = peerId;
+        this.filePath = filePath;
+        this.lineId = lineId;
     }
 
     public String getRoomId() {
-        return getString("roomId");
+        return roomId;
     }
 
     public String getPeerId() {
-        return getString("peerId");
+        return peerId;
     }
 
     public String getFilePath() {
-        return getString("filePath");
+        return filePath;
     }
 
     public String getLineId() {
-        return getString("lineId");
+        return lineId;
     }
 }

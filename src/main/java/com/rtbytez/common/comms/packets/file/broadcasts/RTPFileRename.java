@@ -3,28 +3,34 @@ package com.rtbytez.common.comms.packets.file.broadcasts;
 import com.rtbytez.common.comms.packets.RTPacket;
 
 public class RTPFileRename extends RTPacket {
+
+    private final String roomId;
+    private final String peerId;
+    private final String fileOldPath;
+    private final String fileNewPath;
+
     public RTPFileRename(String header, String roomId, String peerId, String fileOldPath, String fileNewPath) {
         super(header);
         setShortCode("FileRename");
-        put("roomId", roomId);
-        put("peerId", peerId);
-        put("fileOldPath", fileOldPath);
-        put("fileNewPath", fileNewPath);
+        this.roomId = roomId;
+        this.peerId = peerId;
+        this.fileOldPath = fileOldPath;
+        this.fileNewPath = fileNewPath;
     }
 
     public String getRoomId() {
-        return getString("roomId");
+        return roomId;
     }
 
     public String getPeerId() {
-        return getString("peerId");
+        return peerId;
     }
 
     public String getFileOldPath() {
-        return getString("fileOldPath");
+        return fileOldPath;
     }
 
     public String getFileNewPath() {
-        return getString("fileNewPath");
+        return fileNewPath;
     }
 }

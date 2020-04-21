@@ -1,7 +1,5 @@
 package com.rtbytez.common.comms.bundles;
 
-import org.json.JSONObject;
-
 public class LineBundle extends Bundle {
 
     private final String lineId;
@@ -14,17 +12,15 @@ public class LineBundle extends Bundle {
         this.text = text;
     }
 
-    @Override
-    public JSONObject getJSON() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("lineId", this.lineId);
-        jsonObject.put("lineNumber", lineNumber);
-        jsonObject.put("text", text);
-        return jsonObject;
+    public String getLineId() {
+        return lineId;
     }
 
-    @Override
-    public String getPreferredKey() {
-        return lineId;
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    public String getText() {
+        return text;
     }
 }

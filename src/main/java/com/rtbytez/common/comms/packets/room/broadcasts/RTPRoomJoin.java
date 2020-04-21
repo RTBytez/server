@@ -4,23 +4,27 @@ import com.rtbytez.common.comms.packets.RTPacket;
 
 public class RTPRoomJoin extends RTPacket {
 
+    private final String roomId;
+    private final String peerId;
+    private final String peerUsername;
+
     public RTPRoomJoin(String header, String roomId, String peerId, String peerUsername) {
         super(header);
         setShortCode("RoomJoin");
-        put("roomId", roomId);
-        put("peerId", peerId);
-        put("peerUsername", peerUsername);
+        this.roomId = roomId;
+        this.peerId = peerId;
+        this.peerUsername = peerUsername;
     }
 
     public String getRoomId() {
-        return getString("roomId");
+        return roomId;
     }
 
     public String getPeerId() {
-        return getString("peerId");
+        return peerId;
     }
 
     public String getPeerUsername() {
-        return getString("peerUsername");
+        return peerUsername;
     }
 }

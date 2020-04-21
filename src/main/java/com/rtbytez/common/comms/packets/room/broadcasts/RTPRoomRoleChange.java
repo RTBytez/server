@@ -3,28 +3,34 @@ package com.rtbytez.common.comms.packets.room.broadcasts;
 import com.rtbytez.common.comms.packets.RTPacket;
 
 public class RTPRoomRoleChange extends RTPacket {
+
+    private final String roomId;
+    private final String peerId;
+    private final String peerUsername;
+    private final String role;
+
     public RTPRoomRoleChange(String header, String roomId, String peerId, String peerUsername, String role) {
         super(header);
         setShortCode("RoomRoleChange");
-        put("roomId", roomId);
-        put("peerId", peerId);
-        put("peerUsername", peerUsername);
-        put("role", role);
+        this.roomId = roomId;
+        this.peerId = peerId;
+        this.peerUsername = peerUsername;
+        this.role = role;
     }
 
     public String getRoomId() {
-        return getString("roomId");
+        return roomId;
     }
 
     public String getPeerId() {
-        return getString("peerId");
+        return peerId;
     }
 
     public String getPeerUsername() {
-        return getString("peerUsername");
+        return peerUsername;
     }
 
     public String getRole() {
-        return getString("role");
+        return role;
     }
 }

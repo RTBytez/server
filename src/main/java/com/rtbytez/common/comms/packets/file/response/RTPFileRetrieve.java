@@ -7,16 +7,13 @@ import java.util.List;
 
 public class RTPFileRetrieve extends RTPacket {
 
-    protected RTPFileRetrieve() {
-
-    }
+    private final String roomId;
+    private final String filePath;
 
     public RTPFileRetrieve(String header, String roomId, String filePath, List<LineBundle> lines) {
         super(header);
         setShortCode("FileRetrieve");
-        put("roomId", roomId);
-        put("filePath", filePath);
-        put("lines", lines);
+        this.roomId = roomId;
+        this.filePath = filePath;
     }
-
 }
