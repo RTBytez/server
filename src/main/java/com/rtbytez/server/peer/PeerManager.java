@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class PeerManager {
 
-    private static HashMap<String, Peer> peers = new HashMap<>();
+    private static final HashMap<String, Peer> peers = new HashMap<>();
 
     /**
      * Disabled Object Initialization due to this class being static-only

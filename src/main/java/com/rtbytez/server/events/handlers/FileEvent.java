@@ -180,7 +180,6 @@ public class FileEvent extends PeerEventHandler {
                 }
                 room.getFileIORouter().removeLine(peer, path, lineId);
                 peer.emit("file", MessageCreator.ok());
-                return;
             }
         }
     }

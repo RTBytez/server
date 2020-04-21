@@ -26,9 +26,9 @@ public class ServerProcess {
 
             System.out.println("RTBytez Server");
             System.out.println("Arguments are as follows");
-            System.out.println("-bind=<IP> | Bind to an ip address (Default=All Interfaces)");
+            System.out.println("-bind=<IP> | Bind to an ip address (Default=0.0.0.0)");
             System.out.println("-port=<PORT> | Set server port number (Default=5623)");
-            System.out.println("Example use: java -jar rtbytez-server.jar -bind=127.0.0.1 -port=5623");
+            System.out.println("Example use: java -jar rtbytez-server.jar -bind=0.0.0.0 -port=5623");
 
             System.exit(0);
             return;

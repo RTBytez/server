@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class File {
 
-    private HashMap<String, Line> lines = new HashMap<>();
-    private List<Line> linesInOrder = new ArrayList<>();
+    private final HashMap<String, Line> lines = new HashMap<>();
+    private final List<Line> linesInOrder = new ArrayList<>();
 
     public File() {
 

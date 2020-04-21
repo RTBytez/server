@@ -6,8 +6,8 @@ import com.rtbytez.server.util.MessageCreator;
 
 public class FileIORouter {
 
-    private Room room;
-    private FileManager fileManager;
+    private final Room room;
+    private final FileManager fileManager;
 
     public FileIORouter(Room room) {
         this.room = room;
