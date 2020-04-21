@@ -11,11 +11,9 @@ public class Peer {
     private final SocketIOClient socket;
     private final PeerEventListener eventListener;
     private final String uuid;
-    private String username;
     private final String secret;
-
+    private String username;
     private boolean canSafeDisconnect;
-
 
     /**
      * Package-private constructor. Use PeerManager to retrieve & create peers.
