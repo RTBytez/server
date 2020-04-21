@@ -15,7 +15,6 @@ public class Peer {
     private String username;
     private boolean canSafeDisconnect;
 
-
     /**
      * Package-private constructor. Use PeerManager to retrieve & create peers.
      *
