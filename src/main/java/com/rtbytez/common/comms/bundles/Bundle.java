@@ -4,13 +4,8 @@ import org.json.JSONObject;
 
 public abstract class Bundle {
 
+    public abstract JSONObject getJSON();
 
-    public JSONObject getJSON() {
-
-    }
-
-    public String getPreferredKey() {
-
-    }
+    public abstract String getPreferredKey();
 
 }

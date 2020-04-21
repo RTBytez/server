@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class RTPacket {
@@ -76,7 +77,7 @@ public abstract class RTPacket {
     }
 
     public String getString(String key) {
-        return raw.getString(key, "");
+        return raw.getString(key);
     }
 
     public int getInt(String key) {
@@ -84,7 +85,15 @@ public abstract class RTPacket {
     }
 
     public boolean getBoolean(String key) {
-        return raw.getBoolean(key, false);
+        return raw.getBoolean(key);
+    }
+
+    public List<? extends Bundle> getBundles(String key) {
+        List<? extends Bundle> bundles = new ArrayList<>();
+        JSONObject jsonObject = raw.getJSONObject(key);
+        for (String loopKey : jsonObject.keySet()) {
+            bundles.add()
+        }
     }
 
     public boolean isValid() {
