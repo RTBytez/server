@@ -1,9 +1,12 @@
 package com.rtbytez.common.comms.packets;
 
+import com.rtbytez.common.comms.bundles.Bundle;
 import com.rtbytez.common.util.RTJSON;
+import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public abstract class RTPacket {
 
@@ -62,6 +65,14 @@ public abstract class RTPacket {
 
     public void put(String key, boolean value) {
         raw.put(key, value);
+    }
+
+    public void put(String key, List<? extends Bundle> bundles) {
+        JSONObject jsonObject = new JSONObject();
+        for (Bundle bundle : bundles) {
+            jsonObject.put(bundle.getPreferredKey(), bundle.getJSON());
+        }
+        raw.put(key, jsonObject);
     }
 
     public String getString(String key) {
