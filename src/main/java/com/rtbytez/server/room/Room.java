@@ -1,5 +1,8 @@
 package com.rtbytez.server.room;
 
+import com.rtbytez.common.comms.packets.RTPacket;
+import com.rtbytez.common.comms.packets.room.broadcasts.RTPRoomJoin;
+import com.rtbytez.common.comms.packets.room.broadcasts.RTPRoomLeave;
 import com.rtbytez.server.file.FileIORouter;
 import com.rtbytez.server.file.FileManager;
 import com.rtbytez.server.peer.Peer;
@@ -36,7 +39,7 @@ public class Room {
             foreignRoom.removeMember(peer);
         }
         members.put(peer, RoomRole.VIEWER);
-        this.broadcast("room", MessageCreator.roomJoin(this, peer));
+        this.broadcast(new RTPRoomJoin("change", this.id, peer.getId(), peer.getUsername()));
     }
 
     /**
@@ -57,7 +60,7 @@ public class Room {
     public void removeMember(Peer peer) {
         //TODO: Check last member -> check for changes, push and delete room
         //TODO: Check if room owner -> promote highest member by seniority to room owner
-        this.broadcast("room", MessageCreator.roomLeave(this, peer));
+        this.broadcast(new RTPRoomLeave("change", this.id, peer.getId(), peer.getUsername()));
         members.remove(peer);
     }
 
@@ -110,6 +113,15 @@ public class Room {
      */
     public void broadcast(String header, JSONObject data) {
         members.forEach((peer, roomRole) -> peer.emit(header, data));
+    }
+
+    /**
+     * Broadcast a message to all peers inside this room
+     *
+     * @param packet The packet in which to broadcast
+     */
+    public void broadcast(RTPacket packet) {
+        members.forEach((peer, roomRole) -> peer.emit(packet));
     }
 
     /**

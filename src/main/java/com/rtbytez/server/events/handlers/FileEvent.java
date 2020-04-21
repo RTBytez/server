@@ -1,8 +1,10 @@
 package com.rtbytez.server.events.handlers;
 
+import com.rtbytez.common.comms.bundles.LineBundle;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorAlreadyExists;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorDoesntExist;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorLineDoesntExist;
+import com.rtbytez.common.comms.packets.file.response.RTPFileRetrieve;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorInvalidArguments;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorNoPermission;
 import com.rtbytez.common.comms.packets.generic.ok.RTPOK;
@@ -15,6 +17,9 @@ import com.rtbytez.server.peer.PeerEventHandler;
 import com.rtbytez.server.permissions.RoomAction;
 import com.rtbytez.server.room.Room;
 import com.rtbytez.server.room.RoomManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileEvent extends PeerEventHandler {
 
@@ -112,7 +117,9 @@ public class FileEvent extends PeerEventHandler {
                     return;
                 }
                 File file = room.getFileManager().getFile(path);
-                peer.emit("file", MessageCreator.fileRetrieve(room, path, file)); //TODO
+                List<LineBundle> lineBundles = new ArrayList<>();
+                file.getLines().forEach((s, line) -> lineBundles.add(new LineBundle(line.getId(), line.getLineNumber(), line.getText())));
+                peer.emit(new RTPFileRetrieve("file", room.getId(), path, lineBundles));
                 return;
             }
 
