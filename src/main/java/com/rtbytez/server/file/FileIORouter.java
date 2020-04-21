@@ -2,7 +2,6 @@ package com.rtbytez.server.file;
 
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.room.Room;
-import com.rtbytez.server.util.MessageCreator;
 
 public class FileIORouter {
 
