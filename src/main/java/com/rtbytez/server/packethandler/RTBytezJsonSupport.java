@@ -57,11 +57,11 @@ public class RTBytezJsonSupport extends JacksonJsonSupport implements JsonSuppor
 
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);
+        //objectMapper.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
-    public class NewEventDeserializer extends StdDeserializer<Event> {
+    public static class NewEventDeserializer extends StdDeserializer<Event> {
 
         private static final long serialVersionUID = 8178797221017768689L;
 
@@ -78,10 +78,9 @@ public class RTBytezJsonSupport extends JacksonJsonSupport implements JsonSuppor
             String raw = tree.toString();
             JSONArray array = new JSONArray(raw);
             String eventName = array.getString(0);
-            List<Object> eventArgs = new ArrayList<Object>();
+            List<Object> eventArgs = new ArrayList<>();
             eventArgs.add(new MessageObject(array.get(1).toString()));
-            Event event = new Event(eventName, eventArgs);
-            return event;
+            return new Event(eventName, eventArgs);
         }
     }
 }

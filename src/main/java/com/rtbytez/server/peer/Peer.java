@@ -1,6 +1,7 @@
 package com.rtbytez.server.peer;
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.server.util.Console;
 import org.json.JSONObject;
 
@@ -11,11 +12,9 @@ public class Peer {
     private final SocketIOClient socket;
     private final PeerEventListener eventListener;
     private final String uuid;
+    private final String secret;
     private String username;
-    private String secret;
-
     private boolean canSafeDisconnect;
-
 
     /**
      * Package-private constructor. Use PeerManager to retrieve & create peers.
@@ -29,6 +28,15 @@ public class Peer {
         this.eventListener = new PeerEventListener(this);
         this.canSafeDisconnect = false;
         this.username = "";
+    }
+
+    /**
+     * Emit a fully-made RTPacket ready for transfer
+     *
+     * @param packet The packet to send down the
+     */
+    public void emit(RTPacket packet) {
+        this.rawEmit(packet.getHeader(), packet.toJsonString());
     }
 
     /**

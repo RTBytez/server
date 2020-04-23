@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class RoomManager {
 
-    private static HashMap<String, Room> rooms = new HashMap<>();
+    private static final HashMap<String, Room> rooms = new HashMap<>();
 
     /**
      * Disabled Object Initialization due to this class being static-only

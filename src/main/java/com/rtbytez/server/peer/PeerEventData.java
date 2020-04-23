@@ -1,7 +1,7 @@
 package com.rtbytez.server.peer;
 
+import com.rtbytez.common.util.RTJSON;
 import com.rtbytez.server.util.Console;
-import com.rtbytez.server.util.RTJSON;
 import org.json.JSONObject;
 
 public class PeerEventData {

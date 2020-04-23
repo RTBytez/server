@@ -9,6 +9,7 @@ import com.rtbytez.server.util.Console;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class EventManager implements EventInterceptor {
 
@@ -20,7 +21,7 @@ public class EventManager implements EventInterceptor {
     public void onEvent(NamespaceClient client, String eventName, List<Object> args, AckRequest ackRequest) {
         Peer peer = PeerManager.getPeerBySocketId(client.getSessionId().toString());
         //TODO: Fix null check or add error throw to PeerManager#getPeerBySocketId
-        Console.log("Packet", peer.getShort() + " => {" + eventName + " " + Arrays.toString(args.toArray()) + "}");
+        Console.log("Packet", Objects.requireNonNull(peer).getShort() + " => {" + eventName + " " + Arrays.toString(args.toArray()) + "}");
         peer.getEventListener().event(eventName, args.toArray());
     }
 }
