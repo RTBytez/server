@@ -88,6 +88,13 @@ public class Peer {
     }
 
     /**
+     * @see PeerEventListener#addEventHandler(String, PeerEventHandler, PeerEventMiddleware...)
+     */
+    public int on(String header, PeerEventHandler handler, PeerEventMiddleware... middlewares) {
+        return eventListener.addEventHandler(header, handler, middlewares);
+    }
+
+    /**
      * @see PeerEventListener#removeEventHandler(int)
      */
     public void removeEvent(int id) {

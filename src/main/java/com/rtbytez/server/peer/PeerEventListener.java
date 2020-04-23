@@ -28,6 +28,23 @@ public class PeerEventListener {
     }
 
     /**
+     * Register an event to execute if a message with the appropriate header is sent over the socket
+     *
+     * @param header      The header to listen to
+     * @param handler     Your written handler
+     * @param middlewares Middleware handlers that will execute before the actual event handler
+     * @return ID of initialized event handler for removal purposes
+     */
+    public int addEventHandler(String header, PeerEventHandler handler, PeerEventMiddleware... middlewares) {
+        PeerEventHandlerEntry peerEventHandlerEntry = new PeerEventHandlerEntry(header, handler);
+        for (PeerEventMiddleware middleware : middlewares) {
+            peerEventHandlerEntry.addMiddleware(middleware);
+        }
+        peerEventHandlers.add(peerEventHandlerEntry);
+        return peerEventHandlers.size() - 1;
+    }
+
+    /**
      * Remove a handler based on it's given ID
      *
      * @param id ID of the handler that is to be removed
@@ -65,7 +82,13 @@ public class PeerEventListener {
     public void event(String header, Object... data) {
         for (PeerEventHandlerEntry entry : peerEventHandlers) {
             if (entry.getHeader().equals(header)) {
-                entry.getPeerEventHandler().exec(header, peer, new PeerEventData(data));
+                PeerEventData peerEventData = new PeerEventData(data);
+                for (PeerEventMiddleware middleware : entry.getMiddleware()) {
+                    if (middleware.exec(header, peer, peerEventData) != 0) {
+                        return;
+                    }
+                }
+                entry.getPeerEventHandler().exec(header, peer, peerEventData);
             }
         }
     }

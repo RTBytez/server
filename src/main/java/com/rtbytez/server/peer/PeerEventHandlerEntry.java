@@ -1,9 +1,13 @@
 package com.rtbytez.server.peer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PeerEventHandlerEntry {
 
     final String header;
     final PeerEventHandler peerEventHandler;
+    List<PeerEventMiddleware> middlewareList = new ArrayList<>();
 
     public PeerEventHandlerEntry(String header, PeerEventHandler handler) {
         this.header = header;
@@ -16,5 +20,13 @@ public class PeerEventHandlerEntry {
 
     public PeerEventHandler getPeerEventHandler() {
         return peerEventHandler;
+    }
+
+    public void addMiddleware(PeerEventMiddleware middleware) {
+        middlewareList.add(middleware);
+    }
+
+    public List<PeerEventMiddleware> getMiddleware() {
+        return middlewareList;
     }
 }
