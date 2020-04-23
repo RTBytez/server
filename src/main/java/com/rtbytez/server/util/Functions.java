@@ -4,7 +4,10 @@ import com.github.difflib.DiffUtils;
 import com.github.difflib.algorithm.DiffException;
 import com.github.difflib.patch.*;
 import com.rtbytez.server.file.Line;
+import org.slf4j.LoggerFactory;
+import org.slf4j.impl.SimpleLogger;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +29,21 @@ public class Functions {
     public static String s4() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().substring(0, 7);
+    }
+
+    /**
+     * Have a logger that is annoying and needs disabling?
+     * Well then run this method to get you out of your logger problems. Don't wait, run today!
+     */
+    public static void disableLoggerFor(Class clazz) {
+        SimpleLogger logger = (SimpleLogger) LoggerFactory.getLogger(clazz);
+        try {
+            Field field = SimpleLogger.class.getDeclaredField("currentLogLevel");
+            field.setAccessible(true);
+            field.set(logger, 25);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
