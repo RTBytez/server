@@ -1,7 +1,7 @@
 package com.rtbytez.server.peer;
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.rtbytez.server.util.Console;
+import com.rtbytez.common.util.Console;
 
 import java.util.HashMap;
 import java.util.Map;

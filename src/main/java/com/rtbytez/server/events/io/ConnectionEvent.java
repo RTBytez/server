@@ -2,10 +2,10 @@ package com.rtbytez.server.events.io;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.listener.ConnectListener;
+import com.rtbytez.common.util.Console;
 import com.rtbytez.server.events.handlers.*;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerManager;
-import com.rtbytez.server.util.Console;
 
 public class ConnectionEvent implements ConnectListener {
 

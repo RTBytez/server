@@ -2,7 +2,7 @@ package com.rtbytez.server.peer;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.rtbytez.common.comms.packets.RTPacket;
-import com.rtbytez.server.util.Console;
+import com.rtbytez.common.util.Console;
 import org.json.JSONObject;
 
 import java.util.UUID;

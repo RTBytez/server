@@ -3,16 +3,16 @@ package com.rtbytez.server;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.rtbytez.common.util.Console;
 import com.rtbytez.server.events.EventManager;
 import com.rtbytez.server.events.io.ConnectionEvent;
 import com.rtbytez.server.events.io.DisconnectionEvent;
 import com.rtbytez.server.packethandler.RTBytezJsonSupport;
-import com.rtbytez.server.util.Console;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.rtbytez.server.util.Functions.disableLoggerFor;
+import static com.rtbytez.common.util.Functions.disableLoggerFor;
 
 /**
  * The birth of the RTBytez Server
