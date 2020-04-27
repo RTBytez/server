@@ -1,5 +1,6 @@
 package com.rtbytez.server.peer;
 
+import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.common.util.Console;
 
 public abstract class PeerEventMiddleware {
@@ -11,11 +12,10 @@ public abstract class PeerEventMiddleware {
     /**
      * Handle a middleware execution
      *
-     * @param header The header of this event
      * @param peer   The peer associated with this event
-     * @param data   The data associated with this event
+     * @param packet The packet that was received in the event
      * @return 0 to continue and move on to the next middleware or the event handler, any other number to stop
      */
-    public abstract int exec(String header, Peer peer, PeerEventData data);
+    public abstract int exec(Peer peer, RTPacket packet);
 
 }

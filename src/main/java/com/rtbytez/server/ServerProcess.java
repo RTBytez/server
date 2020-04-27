@@ -4,7 +4,7 @@ import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.rtbytez.common.util.Console;
-import com.rtbytez.server.events.EventManager;
+import com.rtbytez.server.events.PacketRouter;
 import com.rtbytez.server.events.io.ConnectionEvent;
 import com.rtbytez.server.events.io.DisconnectionEvent;
 import com.rtbytez.server.packethandler.RTBytezJsonSupport;
@@ -59,7 +59,7 @@ public class ServerProcess {
         Console.log("Server", "Starting on " + address + ":" + port + " ...");
         server.addConnectListener(new ConnectionEvent());
         server.addDisconnectListener(new DisconnectionEvent());
-        server.addEventInterceptor(new EventManager());
+        server.addEventInterceptor(new PacketRouter());
         server.start();
         Console.log("Server", "Startup complete!");
 
