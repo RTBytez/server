@@ -6,9 +6,9 @@ import com.rtbytez.common.comms.packets.file.error.RTPFileErrorAlreadyExists;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorDoesntExist;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorLineDoesntExist;
 import com.rtbytez.common.comms.packets.file.request.*;
+import com.rtbytez.common.comms.packets.file.response.RTPFileList;
 import com.rtbytez.common.comms.packets.file.response.RTPFileRetrieve;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorGeneric;
-import com.rtbytez.common.comms.packets.generic.error.RTPErrorInvalidPacket;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorNoPermission;
 import com.rtbytez.common.comms.packets.generic.ok.RTPOK;
 import com.rtbytez.server.file.File;
@@ -34,8 +34,15 @@ public class FileEvent extends PeerEventHandler {
         Room room = RoomManager.getRoomOf(peer);
         assert room != null; // Since this is checked in middleware
 
-        if (!packet.isValid()) {
-            peer.emit(new RTPErrorInvalidPacket("file"));
+
+        if (packet instanceof RTPFileRequestList) {
+
+            if (!room.hasPermissionTo(peer, RoomAction.RETRIEVE_FILE)) {
+                peer.emit(new RTPErrorNoPermission("file"));
+                return;
+            }
+
+            peer.emit(new RTPFileList("file", room.getFileManager().getFileNames()));
             return;
         }
 
