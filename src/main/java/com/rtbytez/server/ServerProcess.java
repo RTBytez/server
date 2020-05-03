@@ -21,7 +21,7 @@ public class ServerProcess {
 
     public static void main(String[] rawArgs) {
         List<String> args = Arrays.asList(rawArgs);
-        if (String.join(" ", args).contains("help")) {
+        if (args.contains("help")) {
 
             System.out.println("RTBytez Server");
             System.out.println("Arguments are as follows");
