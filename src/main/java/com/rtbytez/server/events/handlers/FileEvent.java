@@ -6,6 +6,7 @@ import com.rtbytez.common.comms.packets.file.error.RTPFileErrorAlreadyExists;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorDoesntExist;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorLineDoesntExist;
 import com.rtbytez.common.comms.packets.file.request.*;
+import com.rtbytez.common.comms.packets.file.response.RTPFileHash;
 import com.rtbytez.common.comms.packets.file.response.RTPFileList;
 import com.rtbytez.common.comms.packets.file.response.RTPFileRetrieve;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorGeneric;
@@ -34,6 +35,23 @@ public class FileEvent extends PeerEventHandler {
         Room room = RoomManager.getRoomOf(peer);
         assert room != null; // Since this is checked in middleware
 
+
+        if (packet instanceof RTPFileRequestHash) {
+            RTPFileRequestHash rtpFileRequestHash = (RTPFileRequestHash) packet;
+
+            if (!room.hasPermissionTo(peer, RoomAction.RETRIEVE_FILE)) {
+                peer.emit(new RTPErrorNoPermission("file"));
+                return;
+            }
+
+            if (!room.getFileManager().doesFileExist(rtpFileRequestHash.getFilePath())) {
+                peer.emit(new RTPFileErrorDoesntExist("file"));
+                return;
+            }
+
+            peer.emit(new RTPFileHash("file", rtpFileRequestHash.getFilePath(), room.getFileManager().getFile(rtpFileRequestHash.getFilePath()).getHash()));
+            return;
+        }
 
         if (packet instanceof RTPFileRequestList) {
 
@@ -119,7 +137,7 @@ public class FileEvent extends PeerEventHandler {
             File file = room.getFileManager().getFile(rtpFileRequestRetrieve.getFilePath());
             List<LineBundle> lineBundles = new ArrayList<>();
             file.getLines().forEach((s, line) -> lineBundles.add(new LineBundle(line.getId(), line.getLineNumber(), line.getText())));
-            peer.emit(new RTPFileRetrieve("file", room.getId(), rtpFileRequestRetrieve.getFilePath(), lineBundles));
+            peer.emit(new RTPFileRetrieve("file", room.getId(), rtpFileRequestRetrieve.getFilePath(), file.getHash(), lineBundles));
             return;
         }
 
