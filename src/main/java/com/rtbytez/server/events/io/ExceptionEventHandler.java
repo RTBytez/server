@@ -8,7 +8,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.List;
 
-public class ExceptionEvent implements ExceptionListener {
+public class ExceptionEventHandler implements ExceptionListener {
     @Override
     public void onEventException(Exception e, List<Object> args, SocketIOClient client) {
         Console.log("ExceptionHandler", PeerManager.getPeer(client).getShort() + " - " + e.getMessage());

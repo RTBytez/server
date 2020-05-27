@@ -22,9 +22,9 @@ import com.rtbytez.server.room.RoomManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileEvent extends PeerEventHandler {
+public class FileEventHandler extends PeerEventHandler {
 
-    public FileEvent() {
+    public FileEventHandler() {
         super();
     }
 

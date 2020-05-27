@@ -9,9 +9,9 @@ import com.rtbytez.server.events.middleware.MPeerInRoom;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerManager;
 
-public class ConnectionEvent implements ConnectListener {
+public class ConnectionEventHandler implements ConnectListener {
 
-    public ConnectionEvent() {
+    public ConnectionEventHandler() {
         Console.log("ConnectionEvent", "Registered with Server Namespace");
     }
 
@@ -19,10 +19,10 @@ public class ConnectionEvent implements ConnectListener {
     public void onConnect(SocketIOClient socket) {
         Peer peer = PeerManager.getPeer(socket);
         Console.log("ConnectEvent", peer.getShort() + " Connected");
-        peer.on("echo", new EchoEvent());
-        peer.on("auth", new AuthenticateEvent()); //TODO
-        peer.on("file", new FileEvent(), new MPacketValidator(), new MPeerInRoom());
-        peer.on("info", new InfoEvent(), new MPacketValidator());
-        peer.on("room", new RoomEvent(), new MPacketValidator());
+        peer.on("echo", new EchoEventHandler());
+        peer.on("auth", new AuthenticateEventHandler()); //TODO
+        peer.on("file", new FileEventHandler(), new MPacketValidator(), new MPeerInRoom());
+        peer.on("info", new InfoEventHandler(), new MPacketValidator());
+        peer.on("room", new RoomEventHandler(), new MPacketValidator());
     }
 }

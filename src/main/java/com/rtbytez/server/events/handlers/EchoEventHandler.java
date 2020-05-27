@@ -4,9 +4,9 @@ import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventHandler;
 
-public class EchoEvent extends PeerEventHandler {
+public class EchoEventHandler extends PeerEventHandler {
 
-    public EchoEvent() {
+    public EchoEventHandler() {
         super();
     }
 

@@ -20,9 +20,9 @@ import com.rtbytez.server.permissions.ServerManager;
 import com.rtbytez.server.room.Room;
 import com.rtbytez.server.room.RoomManager;
 
-public class RoomEvent extends PeerEventHandler {
+public class RoomEventHandler extends PeerEventHandler {
 
-    public RoomEvent() {
+    public RoomEventHandler() {
         super();
     }
 

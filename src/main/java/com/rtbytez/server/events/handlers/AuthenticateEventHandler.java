@@ -4,9 +4,9 @@ import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventHandler;
 
-public class AuthenticateEvent extends PeerEventHandler {
+public class AuthenticateEventHandler extends PeerEventHandler {
 
-    public AuthenticateEvent() {
+    public AuthenticateEventHandler() {
         super();
     }
 

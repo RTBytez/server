@@ -9,7 +9,7 @@ import com.rtbytez.common.comms.packets.info.response.RTPInfoSecret;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventHandler;
 
-public class InfoEvent extends PeerEventHandler {
+public class InfoEventHandler extends PeerEventHandler {
     @Override
     public void exec(Peer peer, RTPacket packet) {
 
