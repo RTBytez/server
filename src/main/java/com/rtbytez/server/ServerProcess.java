@@ -7,6 +7,7 @@ import com.rtbytez.common.util.Console;
 import com.rtbytez.server.events.PacketRouter;
 import com.rtbytez.server.events.io.ConnectionEvent;
 import com.rtbytez.server.events.io.DisconnectionEvent;
+import com.rtbytez.server.events.io.ExceptionEvent;
 import com.rtbytez.server.packethandler.RTBytezJsonSupport;
 
 import java.util.Arrays;
@@ -55,6 +56,7 @@ public class ServerProcess {
         socketConfig.setReuseAddress(true);
         config.setSocketConfig(socketConfig);
         config.setJsonSupport(new RTBytezJsonSupport());
+        config.setExceptionListener(new ExceptionEvent());
         SocketIOServer server = new SocketIOServer(config);
         Console.log("Server", "Starting on " + address + ":" + port + " ...");
         server.addConnectListener(new ConnectionEvent());
