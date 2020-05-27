@@ -45,8 +45,8 @@ public class Room {
     /**
      * TODO: Implement
      *
-     * @param peer
-     * @param role
+     * @param peer todo
+     * @param role todo
      */
     public void setRole(Peer peer, RoomRole role) {
         //TODO: Implement in branch feature-permissions
@@ -67,9 +67,9 @@ public class Room {
     /**
      * TODO: Implement
      *
-     * @param peer
-     * @param action
-     * @return
+     * @param peer   todo
+     * @param action todo
+     * @return todo
      */
     public boolean hasPermissionTo(Peer peer, RoomAction action) {
         //TODO: Implement in branch feature-permissions

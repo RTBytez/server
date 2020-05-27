@@ -2,7 +2,7 @@ package com.rtbytez.server.permissions;
 
 public enum RoomRole {
 
-    ADMINISTARTOR,
+    ADMINISTRATOR,
     OWNER,
     OPERATOR,
     EDITOR,

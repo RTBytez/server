@@ -30,7 +30,7 @@ public class ExceptionEventHandler implements ExceptionListener {
     }
 
     @Override
-    public boolean exceptionCaught(ChannelHandlerContext ctx, Throwable e) throws Exception {
+    public boolean exceptionCaught(ChannelHandlerContext ctx, Throwable e) {
         return true;
     }
 }

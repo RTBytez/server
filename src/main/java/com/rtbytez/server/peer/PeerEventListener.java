@@ -77,9 +77,6 @@ public class PeerEventListener {
 
     /**
      * Execute an event based on the registered listeners. To be used by the EventManager
-     *
-     * @param header The header of the event
-     * @param data   The data
      */
     public void event(RTPacket packet) {
         for (PeerEventHandlerEntry entry : peerEventHandlers) {
