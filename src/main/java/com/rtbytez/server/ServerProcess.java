@@ -65,9 +65,10 @@ public class ServerProcess {
         server.start();
         Console.log("Server", "Startup complete!");
 
-        //noinspection InfiniteLoopStatement,StatementWithEmptyBody
-        while (true) {
-            // Moo. Don't stop the server process.
+        try {
+            Thread.sleep(Long.MAX_VALUE);
+        } catch (InterruptedException e) {
+            Console.log("Server process interrupted");
         }
     }
 }
