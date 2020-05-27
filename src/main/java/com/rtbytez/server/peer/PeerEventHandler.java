@@ -1,5 +1,6 @@
 package com.rtbytez.server.peer;
 
+import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.common.util.Console;
 
 public abstract class PeerEventHandler {
@@ -11,10 +12,9 @@ public abstract class PeerEventHandler {
     /**
      * Execute when an event is emitted from the PeerEventListener
      *
-     * @param header Frame header that was received
      * @param peer   Peer instance
-     * @param data   Data from the the frame received
+     * @param packet The packet that was received in the event
      */
-    public abstract void exec(String header, Peer peer, PeerEventData data);
+    public abstract void exec(Peer peer, RTPacket packet);
 
 }

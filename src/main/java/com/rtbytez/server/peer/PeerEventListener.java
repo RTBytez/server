@@ -1,5 +1,7 @@
 package com.rtbytez.server.peer;
 
+import com.rtbytez.common.comms.packets.RTPacket;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,20 +77,16 @@ public class PeerEventListener {
 
     /**
      * Execute an event based on the registered listeners. To be used by the EventManager
-     *
-     * @param header The header of the event
-     * @param data   The data
      */
-    public void event(String header, Object... data) {
+    public void event(RTPacket packet) {
         for (PeerEventHandlerEntry entry : peerEventHandlers) {
-            if (entry.getHeader().equals(header)) {
-                PeerEventData peerEventData = new PeerEventData(data);
+            if (entry.getHeader().equals(packet.getHeader())) {
                 for (PeerEventMiddleware middleware : entry.getMiddleware()) {
-                    if (middleware.exec(header, peer, peerEventData) != 0) {
+                    if (middleware.exec(peer, packet) != 0) {
                         return;
                     }
                 }
-                entry.getPeerEventHandler().exec(header, peer, peerEventData);
+                entry.getPeerEventHandler().exec(peer, packet);
             }
         }
     }

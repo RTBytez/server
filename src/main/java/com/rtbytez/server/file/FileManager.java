@@ -1,6 +1,8 @@
 package com.rtbytez.server.file;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FileManager {
 
@@ -63,4 +65,7 @@ public class FileManager {
         files.remove(path);
     }
 
+    public List<String> getFileNames() {
+        return new ArrayList<>(files.keySet());
+    }
 }

@@ -66,11 +66,12 @@ public class Functions {
             if (abstractDelta instanceof DeleteDelta) {
                 result = first.substring(0, position) + first.substring(position + deltaLength);
             }
+            String secondSubstring = second.substring(position, position + deltaLength);
             if (abstractDelta instanceof ChangeDelta) {
-                result = first.substring(0, position) + second.substring(position, position + deltaLength) + first.substring(position + deltaLength);
+                result = first.substring(0, position) + secondSubstring + first.substring(position + deltaLength);
             }
             if (abstractDelta instanceof InsertDelta) {
-                result = first.substring(0, position) + second.substring(position, position + deltaLength) + first.substring(position);
+                result = first.substring(0, position) + secondSubstring + first.substring(position);
             }
         }
         return result;

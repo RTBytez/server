@@ -39,14 +39,14 @@ public class Room {
             foreignRoom.removeMember(peer);
         }
         members.put(peer, RoomRole.VIEWER);
-        this.broadcast(new RTPRoomJoin("change", this.id, peer.getId(), peer.getUsername()));
+        this.broadcast(new RTPRoomJoin("room", this.id, peer.getId(), peer.getUsername()));
     }
 
     /**
      * TODO: Implement
      *
-     * @param peer
-     * @param role
+     * @param peer todo
+     * @param role todo
      */
     public void setRole(Peer peer, RoomRole role) {
         //TODO: Implement in branch feature-permissions
@@ -60,16 +60,16 @@ public class Room {
     public void removeMember(Peer peer) {
         //TODO: Check last member -> check for changes, push and delete room
         //TODO: Check if room owner -> promote highest member by seniority to room owner
-        this.broadcast(new RTPRoomLeave("change", this.id, peer.getId(), peer.getUsername()));
+        this.broadcast(new RTPRoomLeave("room", this.id, peer.getId(), peer.getUsername()));
         members.remove(peer);
     }
 
     /**
      * TODO: Implement
      *
-     * @param peer
-     * @param action
-     * @return
+     * @param peer   todo
+     * @param action todo
+     * @return todo
      */
     public boolean hasPermissionTo(Peer peer, RoomAction action) {
         //TODO: Implement in branch feature-permissions
@@ -122,6 +122,20 @@ public class Room {
      */
     public void broadcast(RTPacket packet) {
         members.forEach((peer, roomRole) -> peer.emit(packet));
+    }
+
+    /**
+     * Broadcast a message to all peers inside this room except one peer.
+     *
+     * @param ignoredPeer Which peer to ignore
+     * @param packet      The packet in which to broadcast
+     */
+    public void broadcastBut(Peer ignoredPeer, RTPacket packet) {
+        members.forEach((peer, roomRole) -> {
+            if (!peer.getId().equals(ignoredPeer.getId())) {
+                peer.emit(packet);
+            }
+        });
     }
 
     /**

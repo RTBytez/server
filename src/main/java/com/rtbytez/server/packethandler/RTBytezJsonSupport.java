@@ -57,7 +57,6 @@ public class RTBytezJsonSupport extends JacksonJsonSupport implements JsonSuppor
 
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        //objectMapper.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
@@ -73,7 +72,7 @@ public class RTBytezJsonSupport extends JacksonJsonSupport implements JsonSuppor
         }
 
         @Override
-        public Event deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+        public Event deserialize(JsonParser jp, DeserializationContext context) throws IOException {
             TreeNode tree = jp.getCodec().readTree(jp);
             String raw = tree.toString();
             JSONArray array = new JSONArray(raw);

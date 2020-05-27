@@ -1,6 +1,7 @@
 package com.rtbytez.server.file;
 
 import com.rtbytez.server.util.Functions;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,6 +111,10 @@ public class File {
             return str.substring(0, str.length() - 1);
         }
         return "";
+    }
+
+    public String getHash() {
+        return DigestUtils.sha1Hex(this.toString());
     }
 
     /**

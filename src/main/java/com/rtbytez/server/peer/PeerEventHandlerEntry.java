@@ -7,7 +7,7 @@ public class PeerEventHandlerEntry {
 
     final String header;
     final PeerEventHandler peerEventHandler;
-    List<PeerEventMiddleware> middlewareList = new ArrayList<>();
+    final List<PeerEventMiddleware> middlewareList = new ArrayList<>();
 
     public PeerEventHandlerEntry(String header, PeerEventHandler handler) {
         this.header = header;

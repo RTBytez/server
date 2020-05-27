@@ -4,9 +4,10 @@ import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.rtbytez.common.util.Console;
-import com.rtbytez.server.events.EventManager;
-import com.rtbytez.server.events.io.ConnectionEvent;
-import com.rtbytez.server.events.io.DisconnectionEvent;
+import com.rtbytez.server.events.PacketRouter;
+import com.rtbytez.server.events.io.ConnectionEventHandler;
+import com.rtbytez.server.events.io.DisconnectionEventHandler;
+import com.rtbytez.server.events.io.ExceptionEventHandler;
 import com.rtbytez.server.packethandler.RTBytezJsonSupport;
 
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class ServerProcess {
 
     public static void main(String[] rawArgs) {
         List<String> args = Arrays.asList(rawArgs);
-        if (String.join(" ", args).contains("help")) {
+        if (args.contains("help")) {
 
             System.out.println("RTBytez Server");
             System.out.println("Arguments are as follows");
@@ -55,17 +56,19 @@ public class ServerProcess {
         socketConfig.setReuseAddress(true);
         config.setSocketConfig(socketConfig);
         config.setJsonSupport(new RTBytezJsonSupport());
+        config.setExceptionListener(new ExceptionEventHandler());
         SocketIOServer server = new SocketIOServer(config);
         Console.log("Server", "Starting on " + address + ":" + port + " ...");
-        server.addConnectListener(new ConnectionEvent());
-        server.addDisconnectListener(new DisconnectionEvent());
-        server.addEventInterceptor(new EventManager());
+        server.addConnectListener(new ConnectionEventHandler());
+        server.addDisconnectListener(new DisconnectionEventHandler());
+        server.addEventInterceptor(new PacketRouter());
         server.start();
         Console.log("Server", "Startup complete!");
 
-        //noinspection InfiniteLoopStatement,StatementWithEmptyBody
-        while (true) {
-            // Moo. Don't stop the server process.
+        try {
+            Thread.sleep(Long.MAX_VALUE);
+        } catch (InterruptedException e) {
+            Console.log("Server process interrupted");
         }
     }
 }

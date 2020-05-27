@@ -6,9 +6,9 @@ import com.rtbytez.common.util.Console;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerManager;
 
-public class DisconnectionEvent implements DisconnectListener {
+public class DisconnectionEventHandler implements DisconnectListener {
 
-    public DisconnectionEvent() {
+    public DisconnectionEventHandler() {
         Console.log("DisconnectionEvent", "Registered with Server Namespace");
     }
 
