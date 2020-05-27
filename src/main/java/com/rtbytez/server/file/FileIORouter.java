@@ -16,17 +16,17 @@ public class FileIORouter {
 
     public void createFile(Peer peer, String path) {
         this.fileManager.createFile(path);
-        room.broadcast(new RTPFileCreate("file", room.getId(), peer.getId(), path));
+        room.broadcastBut(peer, new RTPFileCreate("file", room.getId(), peer.getId(), path));
     }
 
     public void deleteFile(Peer peer, String path) {
         this.fileManager.deleteFile(path);
-        room.broadcast(new RTPFileDelete("file", room.getId(), peer.getId(), path));
+        room.broadcastBut(peer, new RTPFileDelete("file", room.getId(), peer.getId(), path));
     }
 
     public void renameFile(Peer peer, String oldPath, String newPath) {
         this.fileManager.renameFile(oldPath, newPath);
-        room.broadcast(new RTPFileRename("file", room.getId(), peer.getId(), oldPath, newPath));
+        room.broadcastBut(peer, new RTPFileRename("file", room.getId(), peer.getId(), oldPath, newPath));
     }
 
     public void addLine(Peer peer, String path, int lineNumber) {
@@ -36,7 +36,7 @@ public class FileIORouter {
 
     public void modifyLine(Peer peer, String path, String lineId, String text) {
         this.fileManager.getFile(path).getLineById(lineId).setText(text);
-        room.broadcast(new RTPFileModifyLine("file", room.getId(), peer.getId(), path, lineId, text));
+        room.broadcastBut(peer, new RTPFileModifyLine("file", room.getId(), peer.getId(), path, lineId, text));
     }
 
     public void removeLine(Peer peer, String path, String lineId) {
