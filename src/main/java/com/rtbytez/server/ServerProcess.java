@@ -12,6 +12,7 @@ import com.rtbytez.server.packethandler.RTBytezJsonSupport;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static com.rtbytez.common.util.Functions.disableLoggerFor;
 
@@ -19,6 +20,8 @@ import static com.rtbytez.common.util.Functions.disableLoggerFor;
  * The birth of the RTBytez Server
  */
 public class ServerProcess {
+
+    public static final String INSTANCE_ID = UUID.randomUUID().toString();
 
     public static void main(String[] rawArgs) {
         List<String> args = Arrays.asList(rawArgs);
