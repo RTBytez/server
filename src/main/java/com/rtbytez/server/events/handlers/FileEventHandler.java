@@ -1,18 +1,22 @@
 package com.rtbytez.server.events.handlers;
 
 import com.rtbytez.common.comms.bundles.LineBundle;
+import com.rtbytez.common.comms.enums.NoHashReason;
 import com.rtbytez.common.comms.packets.RTPacket;
+import com.rtbytez.common.comms.packets.file.broadcasts.RTPFileClear;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorAlreadyExists;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorDoesntExist;
 import com.rtbytez.common.comms.packets.file.error.RTPFileErrorLineDoesntExist;
 import com.rtbytez.common.comms.packets.file.request.*;
 import com.rtbytez.common.comms.packets.file.response.RTPFileHash;
 import com.rtbytez.common.comms.packets.file.response.RTPFileList;
+import com.rtbytez.common.comms.packets.file.response.RTPFileNoHash;
 import com.rtbytez.common.comms.packets.file.response.RTPFileRetrieve;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorGeneric;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorNoPermission;
 import com.rtbytez.common.comms.packets.generic.ok.RTPOK;
 import com.rtbytez.server.file.File;
+import com.rtbytez.server.file.Line;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventHandler;
 import com.rtbytez.server.permissions.RoomAction;
@@ -45,12 +49,35 @@ public class FileEventHandler extends PeerEventHandler {
             }
 
             if (!room.getFileManager().doesFileExist(rtpFileRequestHash.getFilePath())) {
-                peer.emit(new RTPFileErrorDoesntExist("file"));
+                peer.emit(new RTPFileNoHash("file", rtpFileRequestHash.getFilePath(), NoHashReason.NO_FILE));
                 return;
             }
 
             peer.emit(new RTPFileHash("file", rtpFileRequestHash.getFilePath(), room.getFileManager().getFile(rtpFileRequestHash.getFilePath()).getHash()));
             return;
+        }
+
+        if (packet instanceof RTPFileRequestSetFile) {
+            RTPFileRequestSetFile rtpFileRequestSetFile = (RTPFileRequestSetFile) packet;
+
+            if (!room.hasPermissionTo(peer, RoomAction.MODIFY_LINE)) {
+                peer.emit(new RTPErrorNoPermission("file"));
+                return;
+            }
+
+            if (!room.getFileManager().doesFileExist(rtpFileRequestSetFile.getFilePath())) {
+                peer.emit(new RTPFileErrorDoesntExist("file"));
+                return;
+            }
+
+            room.broadcast(new RTPFileClear("file", rtpFileRequestSetFile.getFilePath()));
+
+            int lineNumber = 1;
+            for (String lineText : rtpFileRequestSetFile.getLines()) {
+                Line line = room.getFileIORouter().addLine(peer, rtpFileRequestSetFile.getFilePath(), lineNumber);
+                room.getFileIORouter().modifyLine(peer, rtpFileRequestSetFile.getFilePath(), line.getId(), lineText);
+                lineNumber++;
+            }
         }
 
         if (packet instanceof RTPFileRequestList) {

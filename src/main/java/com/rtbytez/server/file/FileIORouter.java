@@ -29,9 +29,10 @@ public class FileIORouter {
         room.broadcastBut(peer, new RTPFileRename("file", room.getId(), peer.getId(), oldPath, newPath));
     }
 
-    public void addLine(Peer peer, String path, int lineNumber) {
+    public Line addLine(Peer peer, String path, int lineNumber) {
         Line line = this.fileManager.getFile(path).newLine(lineNumber);
         room.broadcast(new RTPFileAddLine("file", room.getId(), peer.getId(), path, line.getId(), lineNumber));
+        return line;
     }
 
     public void modifyLine(Peer peer, String path, String lineId, String text) {
