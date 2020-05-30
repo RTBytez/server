@@ -3,6 +3,7 @@ package com.rtbytez.server.events.handlers;
 import com.rtbytez.common.comms.enums.ServerRole;
 import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorGeneric;
+import com.rtbytez.common.comms.packets.info.request.RTPInfoRequestDisconnection;
 import com.rtbytez.common.comms.packets.info.request.RTPInfoRequestPeerInfo;
 import com.rtbytez.common.comms.packets.info.request.RTPInfoRequestSecret;
 import com.rtbytez.common.comms.packets.info.request.RTPInfoRequestServerInstanceId;
@@ -30,6 +31,11 @@ public class InfoEventHandler extends PeerEventHandler {
 
         if (packet instanceof RTPInfoRequestServerInstanceId) {
             peer.emit(new RTPInfoServerInstanceId("info", ServerProcess.INSTANCE_ID));
+            return;
+        }
+
+        if (packet instanceof RTPInfoRequestDisconnection) {
+            peer.setSafeDisconnect(true);
             return;
         }
 
