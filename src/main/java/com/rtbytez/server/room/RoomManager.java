@@ -27,6 +27,13 @@ public class RoomManager {
         return room;
     }
 
+    public static Room createDummyRoom() {
+        Room room = new Room();
+        room.id = "000000";
+        rooms.put(room.getId(), room);
+        return room;
+    }
+
     /**
      * Retrieve a room in memory
      *

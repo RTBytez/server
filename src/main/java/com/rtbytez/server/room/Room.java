@@ -18,7 +18,7 @@ public class Room {
     private final FileManager fileManager;
     private final FileIORouter fileIORouter;
     private final HashMap<Peer, RoomRole> members;
-    private final String id;
+    public String id; // TODO: revert back to private final when dummy room is complete
 
     public Room() {
         this.fileManager = new FileManager();

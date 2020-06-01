@@ -9,6 +9,7 @@ import com.rtbytez.server.events.io.ConnectionEventHandler;
 import com.rtbytez.server.events.io.DisconnectionEventHandler;
 import com.rtbytez.server.events.io.ExceptionEventHandler;
 import com.rtbytez.server.packethandler.RTBytezJsonSupport;
+import com.rtbytez.server.room.RoomManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -67,6 +68,9 @@ public class ServerProcess {
         server.addEventInterceptor(new PacketRouter());
         server.start();
         Console.log("Server", "Startup complete!");
+
+        // Dummy Code
+        RoomManager.createDummyRoom();
 
         try {
             Thread.sleep(Long.MAX_VALUE);
