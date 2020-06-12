@@ -1,13 +1,14 @@
 package com.rtbytez.server.room;
 
+import com.rtbytez.common.comms.enums.RoomRole;
 import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.common.comms.packets.room.broadcasts.RTPRoomJoin;
 import com.rtbytez.common.comms.packets.room.broadcasts.RTPRoomLeave;
+import com.rtbytez.common.comms.packets.room.broadcasts.RTPRoomRoleChange;
 import com.rtbytez.server.file.FileIORouter;
 import com.rtbytez.server.file.FileManager;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.permissions.RoomAction;
-import com.rtbytez.server.permissions.RoomRole;
 import com.rtbytez.server.util.Functions;
 import org.json.JSONObject;
 
@@ -49,7 +50,7 @@ public class Room {
      * @param role todo
      */
     public void setRole(Peer peer, RoomRole role) {
-        //TODO: Implement in branch feature-permissions
+        this.broadcast(new RTPRoomRoleChange("room", this.getId(), peer.getId(), peer.getUsername(), role));
     }
 
     /**

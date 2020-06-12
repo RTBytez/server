@@ -1,5 +1,6 @@
 package com.rtbytez.server.events.handlers;
 
+import com.rtbytez.common.comms.enums.RoomRole;
 import com.rtbytez.common.comms.packets.RTPacket;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorGeneric;
 import com.rtbytez.common.comms.packets.generic.error.RTPErrorNoPermission;
@@ -14,7 +15,6 @@ import com.rtbytez.common.comms.packets.room.request.RTPRoomRequestState;
 import com.rtbytez.common.comms.packets.room.response.RTPRoomJoined;
 import com.rtbytez.server.peer.Peer;
 import com.rtbytez.server.peer.PeerEventHandler;
-import com.rtbytez.server.permissions.RoomRole;
 import com.rtbytez.server.permissions.ServerAction;
 import com.rtbytez.server.permissions.ServerManager;
 import com.rtbytez.server.room.Room;
